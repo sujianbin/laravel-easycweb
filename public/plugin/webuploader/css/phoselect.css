@@ -1,0 +1,769 @@
+.y-nonedata {
+    text-align: center;
+    font-size: 16px;
+    color: #428bca
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: auto;
+}
+
+#y-container, .y-onlinemanage, .y-pho-search {
+    border: 1px solid #dadada;
+    color: #838383;
+    font-size: 12px;
+    background-color: #FFF;
+    width: 100%;
+    height: auto;
+}
+
+#uploader .queueList {
+    margin: 20px;
+}
+
+.element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px);
+    /* IE6, IE7 */
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+#uploader .placeholder {
+    border: 3px dashed #e6e6e6;
+    min-height: 238px;
+    padding-top: 158px;
+    padding-bottom: 30px;
+    text-align: center;
+    background: url(../image/image.png) center 93px no-repeat;
+    color: #cccccc;
+    font-size: 18px;
+    position: relative;
+}
+
+#uploader .placeholder .webuploader-pick {
+    font-size: 18px;
+    background: #428bca;
+    border-radius: 3px;
+    line-height: 44px;
+    padding: 0 30px;
+    color: #fff;
+    display: inline-block;
+    margin: 20px auto;
+    cursor: pointer;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+#uploader .placeholder .webuploader-pick-hover {
+    background: #336fa2;
+}
+
+#uploader .placeholder .flashTip {
+    color: #666666;
+    font-size: 12px;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 20px;
+}
+
+#uploader .placeholder .flashTip a {
+    color: #0785d1;
+    text-decoration: none;
+}
+
+#uploader .placeholder .flashTip a:hover {
+    text-decoration: underline;
+}
+
+#uploader .placeholder.webuploader-dnd-over {
+    border-color: #999999;
+}
+
+#uploader .placeholder.webuploader-dnd-over.webuploader-dnd-denied {
+    border-color: red;
+}
+
+#uploader .filelist {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#uploader .filelist:after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    clear: both;
+}
+
+#uploader .filelist li {
+    width: 110px;
+    height: 110px;
+    background: url(../image/bg.png) no-repeat;
+    text-align: center;
+    margin: 0 8px 20px 0;
+    position: relative;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    font-size: 12px;
+}
+
+#uploader .filelist li p.log {
+    position: relative;
+    top: -45px;
+}
+
+#uploader .filelist li p.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: 5px;
+    text-indent: 5px;
+    text-align: left;
+}
+
+#uploader .filelist li p.progress {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 8px;
+    overflow: hidden;
+    z-index: 50;
+}
+
+#uploader .filelist li p.progress span {
+    display: none;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    background: #1483d8 url(../image/progress.png) repeat-x;
+    -webit-transition: width 200ms linear;
+    -moz-transition: width 200ms linear;
+    -o-transition: width 200ms linear;
+    -ms-transition: width 200ms linear;
+    transition: width 200ms linear;
+    -webkit-animation: progressmove 2s linear infinite;
+    -moz-animation: progressmove 2s linear infinite;
+    -o-animation: progressmove 2s linear infinite;
+    -ms-animation: progressmove 2s linear infinite;
+    animation: progressmove 2s linear infinite;
+    -webkit-transform: translateZ(0);
+}
+
+@-webkit-keyframes progressmove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 17px 0;
+    }
+}
+
+@-moz-keyframes progressmove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 17px 0;
+    }
+}
+
+@keyframes progressmove {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 17px 0;
+    }
+}
+
+#uploader .filelist li p.imgWrap {
+    position: relative;
+    z-index: 2;
+    line-height: 110px;
+    vertical-align: middle;
+    overflow: hidden;
+    width: 110px;
+    height: 110px;
+    -webkit-transform-origin: 50% 50%;
+    -moz-transform-origin: 50% 50%;
+    -o-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    -webit-transition: 200ms ease-out;
+    -moz-transition: 200ms ease-out;
+    -o-transition: 200ms ease-out;
+    -ms-transition: 200ms ease-out;
+    transition: 200ms ease-out;
+}
+
+#uploader .filelist li img {
+    width: 100%;
+}
+
+#uploader .filelist li p.error {
+    background: #f43838;
+    color: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 28px;
+    line-height: 28px;
+    width: 100%;
+    z-index: 100;
+}
+
+#uploader .filelist li .success {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 200;
+    background: url(../image/success.png) no-repeat right bottom;
+}
+
+#uploader .filelist div.file-panel {
+    position: absolute;
+    height: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#80000000', endColorstr='#80000000')\0;
+    background: rgba( 0, 0, 0, 0.5);
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 300;
+}
+
+#uploader .filelist div.file-panel span {
+    width: 24px;
+    height: 24px;
+    display: inline;
+    float: right;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../image/icons.png) no-repeat;
+    margin: 5px 1px 1px;
+    cursor: pointer;
+}
+
+#uploader .filelist div.file-panel span.rotateLeft {
+    background-position: 0 -24px;
+}
+
+#uploader .filelist div.file-panel span.rotateLeft:hover {
+    background-position: 0 0;
+}
+
+#uploader .filelist div.file-panel span.rotateRight {
+    background-position: -24px -24px;
+}
+
+#uploader .filelist div.file-panel span.rotateRight:hover {
+    background-position: -24px 0;
+}
+
+#uploader .filelist div.file-panel span.cancel {
+    background-position: -48px -24px;
+}
+
+#uploader .filelist div.file-panel span.cancel:hover {
+    background-position: -48px 0;
+}
+
+#uploader .statusBar {
+    height: 63px;
+    border-top: 1px solid #dadada;
+    padding: 0 20px;
+    line-height: 63px;
+    vertical-align: middle;
+    position: relative;
+}
+
+#uploader .statusBar .progress {
+    border: 1px solid #1483d8;
+    width: 198px;
+    background: #fff;
+    height: 18px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    color: #6dbfff;
+    position: relative;
+    margin-right: 10px;
+}
+
+#uploader .statusBar .progress span.percentage {
+    width: 0;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #1483d8;
+    position: absolute;
+}
+
+#uploader .statusBar .progress span.text {
+    position: relative;
+    z-index: 10;
+}
+
+#uploader .statusBar .info {
+    display: inline-block;
+    font-size: 14px;
+    color: #666666;
+}
+
+#uploader .statusBar .btns {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    line-height: 40px;
+}
+
+#filePicker2 {
+    display: inline-block;
+    float: left;
+}
+
+#uploader .statusBar .btns .webuploader-pick, #uploader .statusBar .btns .uploadBtn, #uploader .statusBar .btns .uploadBtn.state-uploading, #uploader .statusBar .btns .uploadBtn.state-paused {
+    background: #ffffff;
+    border: 1px solid #cfcfcf;
+    color: #565656;
+    padding: 0 18px;
+    display: inline-block;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    float: left;
+}
+
+#uploader .statusBar .btns .webuploader-pick:hover, #uploader .statusBar .btns .uploadBtn:hover, #uploader .statusBar .btns .uploadBtn.state-uploading:hover, #uploader .statusBar .btns .uploadBtn.state-paused:hover {
+    background: #f0f0f0;
+}
+
+#uploader .statusBar .btns .uploadBtn {
+    background: #428bca;
+    color: #fff;
+    border-color: transparent;
+}
+
+#uploader .statusBar .btns .uploadBtn:hover {
+    background: #336fa2;
+}
+
+#uploader .statusBar .btns .uploadBtn.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+#y-container .upload-btn-b {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+#y-container .upload-btn-b p {
+    display: inline-block;
+    color: #f9f9f9;
+    padding: 0 18px;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    min-width: 150px;
+    background-color: #428bca;
+}
+
+#y-container .upload-btn-b:hover p {
+    background: #336fa2;
+}
+
+#y-container .upload-btn-b .ipt-file {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.y-upload-msk {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 1920px;
+    margin: 0;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .2);
+    z-index: 9;
+}
+
+.y-upload-box {
+   /* position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 1150px;
+    min-width: 600px;
+    max-height: 750px;
+    min-height: 600px;*/
+    width: 100%;
+    background-color: #fff;
+    border-radius: 5px;
+   /* transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);*/
+    overflow: hidden;
+    z-index: 10;
+}
+
+.y-upload-box .title {
+    position: relative;
+    top: 0;
+    width: 100%;
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    background: #fff;
+    border-bottom: 1px #f3f3f3 solid;
+}
+
+.y-upload-box .title p {
+    color: #333333
+}
+
+.y-upload-box .title .cbx {
+    position: absolute;
+    top: 6px;
+    right: 5px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.y-upload-box .title .cbx:hover .close::before, .y-upload-box .title .cbx:hover .close:after {
+    background-color: #666;
+}
+
+.y-upload-box .title .close {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    overflow: hidden;
+}
+
+.y-upload-box .title .close::before, .y-upload-box .title .close::after {
+    position: absolute;
+    content: "";
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background-color: #333;
+    width: 100%;
+    height: 1px;
+}
+
+.y-upload-box .title .close::before {
+    transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    /* IE 9 */
+    -moz-transform: rotate(-45deg);
+    /* Firefox */
+    -webkit-transform: rotate(-45deg);
+    /* Safari å’Œ Chrome */
+    -o-transform: rotate(-45deg);
+    /* Opera */
+}
+
+.y-upload-box .title .close::after {
+    transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    /* IE 9 */
+    -moz-transform: rotate(45deg);
+    /* Firefox */
+    -webkit-transform: rotate(45deg);
+    /* Safari å’Œ Chrome */
+    -o-transform: rotate(45deg);
+    /* Opera */
+}
+
+.y-manage {
+    padding: 20px;
+}
+
+.y-manage .tpy-btn {
+    display: inline-block;
+    padding: 15px 20px;
+    color: #666;
+    border: 1px #999 solid;
+    border-radius: 1px;
+    margin-right: 10px;
+}
+
+.y-manage .tpy-btn:hover, .y-manage .tpy-btn.cur {
+    color: #fff;
+    background-color: #428bca;
+    border: 1px #428bca solid;
+}
+
+.y-con-tab {
+    display: none;
+    margin-top:  20px;
+}
+
+.y-onlinemanage, .y-pho-search {
+    padding: 10px;
+}
+
+.y-onlinemanage .y-file-list .file {
+    overflow: hidden;
+    position: relative;
+    float: left;
+    margin: 10px 10px 0 0;
+    height: 120px;
+    width: 120px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.y-onlinemanage .y-file-list .file .img {
+    position: relative;
+    display: table-cell;
+    height: 120px;
+    width: 120px;
+    vertical-align: middle;
+    text-align: center;
+    z-index: 1;
+}
+
+.y-onlinemanage .y-file-list .file .file-panel {
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -30px;
+    height: 30px;
+    width: 100%;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.5);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#80000000', endColorstr='#80000000')\0;
+    transition: top .5s;
+    -moz-transition: top .5s;
+    -webkit-transition: top .5s;
+    -o-transition: top .5s;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.y-onlinemanage .y-file-list .file:hover .file-panel {
+    top: 0;
+}
+
+.y-onlinemanage .y-file-list .file .file-panel span {
+    width: 24px;
+    height: 24px;
+    display: inline;
+    float: right;
+    text-indent: -9999px;
+    overflow: hidden;
+    background: url(../image/icons.png) no-repeat;
+    cursor: pointer;
+}
+
+.y-onlinemanage .y-file-list .file .file-panel span.cancel {
+    background-position: -48px -19px;
+}
+
+.y-onlinemanage .y-file-list .file .icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 120px;
+    width: 100%;
+    border: 0 none;
+    cursor: pointer;
+    z-index: 2;
+    background: none;
+}
+
+.y-onlinemanage .y-file-list .file.checked .icon {
+    border-bottom: 1px solid #1094FA;
+    background: transparent url(../image/success.png) no-repeat right bottom;
+}
+
+
+/*æŒ‰é’®éƒ¨åˆ†*/
+
+.y-btn-blk {
+    position: relative;
+    line-height: 63px;
+    padding: 0 10px;
+    height: 63px;
+    text-align: right;
+    vertical-align: middle;
+    border: 1px solid #dadada;
+    border-bottom: 0;
+    /* background-color: #f3f3f3; */
+}
+
+.y-btn-blk .y-btn {
+    color: #565656;
+    padding: 0 18px;
+    display: inline-block;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    min-width: 94px;
+}
+
+.y-btn-blk .y-btn-default {
+    border: 1px solid #dadada;
+    background: #ffffff;
+    border: 1px solid #cfcfcf;
+}
+
+.y-btn-blk .y-btn-line {
+    background: #428bca;
+    color: #fff;
+    border-color: transparent;
+}
+
+.y-btn-blk .y-btn-default:hover {
+    background: #f0f0f0;
+}
+
+.y-btn-blk .y-btn-line:hover {
+    background: #336fa2;
+}
+
+
+.y-pho-search {
+    margin: 0;
+}
+
+.y-search-bar {
+    position: relative;
+    line-height: 63px;
+    margin-top: 20px;
+    padding: 10px 0;
+    height: 63px;
+    vertical-align: middle;
+    border: 1px solid #dadada;
+    border-bottom: 0;
+    display: flex;
+}
+
+.y-search-bar input {
+    display: block;
+    float: right;
+    line-height: 40px;
+    min-width: 175px;
+    width: auto;
+    height: 40px;
+    padding: 0 10px;
+    background-color: #f3f3f3;
+    flex: 1;
+}
+
+.y-search-bar .simbtn {
+    display: inline-block;
+    float: right;
+    min-width: 94px;
+    line-height: 40px;
+    margin-right: 10px;
+    background: #428bca;
+    border: #428bca 1px solid;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0 2px 2px 0;
+}
+
+.y-search-bar .simbtn .y-icon-search {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    background-image: url(../image/search.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.y-search-bar .simbtn .y-icon-search span {}
+
+.y-cen {
+    position: relative;
+    width: 100%;
+    /*max-height: 700px;*/
+    /*overflow: auto;*/
+}
+
+.y-onlinemanage .y-file-list .file.y-addpho {
+    position: relative;
+    border-style: dashed;
+    cursor: pointer;
+}
+
+.y-onlinemanage .y-file-list .file.y-addpho .adp {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+.y-onlinemanage .y-file-list .file.y-addpho input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.saveBtn{
+    background: #428bca;
+    color: #fff;
+    border-color: transparent;
+    padding: 0 18px;
+    display: inline-block;
+    border-radius: 3px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 40px;
+    text-align: center;
+    min-width: 94px;
+}
