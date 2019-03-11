@@ -13,11 +13,11 @@
         <div class="header-left">每日看书</div>
         <div class="header-middle">
             <ul>
-                @foreach ($topMenu as $vo)
+                @foreach (right_group() as $k=>$vo)
                     @if ($loop->first)
-                        <li class="curr" data-c="menu-{{ $loop->index }}"> {{ $vo }}</li>
+                        <li class="curr" data-c="menu-{{ $k }}"> {{ $vo['name'] }}</li>
                     @else
-                        <li data-c="menu-{{ $loop->index }}"> {{ $vo }}</li>
+                        <li data-c="menu-{{ $k }}"> {{ $vo['name'] }}</li>
                     @endif
                 @endforeach
             </ul>
@@ -49,7 +49,7 @@
                             <a href="javascript:;" name="{{ url('admin/role/index') }}" title="角色管理" class="iframeurl">角色管理</a>
                         </li>
                         <li>
-                            <a href="javascript:;" name="{{ url('admin/rights/index') }}" title="权限管理" class="iframeurl">权限管理</a>
+                            <a href="javascript:;" name="{{ url('admin/rights') }}" title="权限管理" class="iframeurl">权限管理</a>
                         </li>
                     </ul>
                 </li>

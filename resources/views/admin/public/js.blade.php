@@ -1,6 +1,11 @@
 <script type="text/javascript">
     /*刷新*/
     $(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         // 调整默认选择内容
         $("select").each(function (index, element) {
             $(element).find("option[value='"+$(this).attr('default')+"']").attr('selected','selected');
@@ -211,16 +216,27 @@
         //表单提交
         $("#submit-form").bind('submit', function () {
             $.ajax({
-                type:'POST',
-                url:url,
+                type:$(this).attr('method') ? $(this).attr('method') : 'POST',
+                url:$(this).attr('action'),
                 data:$("#submit-form").serialize(),
                 dataType:'json',
                 success:function (data) {
-                    console.info(data);
+                    if(data === true){
+                        layer.msg('操作成功');
+                        setTimeout(function () {
+                            location.reload();
+                        },1500);
+                    }else{
+                        layer.msg('保存失败');
+                    }
                 },
                 error:function (e) {
-                    console.info(e);
-                    layer.alert('请求失败');
+                    var message = $.parseJSON(e.responseText);
+                    $(".ps").hide();
+                    layer.msg(message.message);
+                    $.each(message.errors,function (i,v) {
+                        $(".s-validate-"+i).text(v[0]).show();
+                    });
                 }
             });
             return false;

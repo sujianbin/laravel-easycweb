@@ -9,9 +9,9 @@
                 <button  type="button" class="btn btn-primary btn-redirect btn-current" name="{{ url('admin/rights/create') }}">添加权限</button>
             </div>
             <div class="Manager_style">
-                <div class="title_name">编辑权限</div>
+                <div class="title_name">添加权限</div>
                 <div class="Role_list">
-                    <form id="submit-form" name="myform" action="{{ route('rights.update',$info) }}" method="PATCH">
+                    <form id="submit-form" name="myform" action="{{ route('rights.store') }}" method="post">
                         @include("admin.right.form")
                         <div class="btn_operating">
                             {{ csrf_field() }}

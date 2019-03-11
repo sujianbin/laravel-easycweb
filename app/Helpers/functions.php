@@ -1,32 +1,40 @@
 <?php
 
+    use Illuminate\Support\Facades\Cache;
     /**
      * 获取权限分组
      */
     if(!function_exists('right_group')){
-        function right_group () {
-            $rightGroup = [
-                'system'=>[
-                    'name'=>'系统管理',
-                    'en_name'=>'system',
-                    'menu'=>system_menu()
-                ],
-                'novel'=>[
-                    'name'=>'小说管理',
-                    'en_name'=>'novel',
-                    'menu'=>novel_menu()
-                ],
-                'user'=>[
-                    'name'=>'用户管理',
-                    'en_name'=>'user',
-                    'menu'=>user_menu()
-                ],
-                'finance'=>[
-                    'name'=>'财务管理',
-                    'en_name'=>'finance',
-                    'menu'=>finance_menu()
-                ]
-            ];
+        function right_group ($group = null) {
+            $rightGroup = Cache::remember('admin_right_group','600', function () {
+                $rightGroup = [
+                    'system'=>[
+                        'name'=>'系统管理',
+                        'en_name'=>'system',
+                        'menu'=>system_menu()
+                    ],
+                    'novel'=>[
+                        'name'=>'小说管理',
+                        'en_name'=>'novel',
+                        'menu'=>novel_menu()
+                    ],
+                    'user'=>[
+                        'name'=>'用户管理',
+                        'en_name'=>'user',
+                        'menu'=>user_menu()
+                    ],
+                    'finance'=>[
+                        'name'=>'财务管理',
+                        'en_name'=>'finance',
+                        'menu'=>finance_menu()
+                    ]
+                ];
+                return $rightGroup;
+            });
+            if(!empty($group)){
+                $group = explode('@',$group);
+                return $rightGroup[$group[0]]['name'].'-'.$rightGroup[$group[0]]['menu'][$group[1]]['name'];
+            }
             return $rightGroup;
         }
 
@@ -91,7 +99,7 @@
                     'name'=>'会员管理',
                     'en_name'=>'member',
                     'item'=>[
-                        'member'=>'会员管理',
+                        'member'=>'会员列表',
                     ]
                 ],
                 'mch'=>[

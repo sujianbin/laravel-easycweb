@@ -28,7 +28,6 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
     Route::any('login','LoginController@index')->name('login');
     Route::get('test','IndexController@test');
 
-    //这里还需要增加权限判断
     Route::group(['middleware'=>['admin','admin.permission']], function () {
         Route::get('/','IndexController@index');
         Route::get('index','IndexController@index');
@@ -41,21 +40,10 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
             Route::get('destory','RoleController@destory');
         });
         //权限管理
+        Route::resource("rights",'SystemRightController',['except'=>['show']]);
         Route::group(['prefix'=>'rights'], function () {
-            Route::get('index','SystemRightController@index');
-            Route::get('add','SystemRightController@add');
-            Route::get('edit/{id}','SystemRightController@edit');
-            Route::get('destory','SystemRightController@destory');
             Route::post('getAllController','SystemRightController@getAllController');
             Route::post('getControllerMethod','SystemRightController@getControllerMethod');
-        });
-        //菜单管理
-        Route::group(['prefix'=>'menu'], function () {
-            Route::get('group','SystemMenuGroupController@index');
-            Route::get('groupAdd','SystemMenuGroupController@add');
-            Route::get('groupEdit/{id}','SystemMenuGroupController@edit');
-            Route::get('destory','SystemMenuGroupController@destory');
-
         });
     });
 });

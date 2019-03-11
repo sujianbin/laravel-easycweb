@@ -749,6 +749,7 @@ select,textarea, input[type="text"], input[type="password"], input[type="datetim
     margin-top: 5px;
     margin-left: 10px;
     color: red;
+    display: none;
 }
 .edit_order span{
     display: inline-block;

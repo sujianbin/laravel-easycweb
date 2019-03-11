@@ -10,7 +10,8 @@
         <meta content="yes" name="apple-mobile-web-app-capable">
         <meta content="yes" name="apple-touch-fullscreen">
         <meta content="telephone=no,email=no" name="format-detection">
-        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/admin/style.css') }}?v=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/admin/style.css') }}?v=1.0">
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('plugin/webuploader/css/phoselect.css') }}">
         <link rel="shortcut icon" href="{{ URL::asset('images/admin/favicon.ico') }}">
         <script type="text/javascript" src="{{ URL::asset('js/admin/jquery.min.js') }}"></script>

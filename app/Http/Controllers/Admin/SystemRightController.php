@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SystemRight\StoreSystemRight;
+use App\Http\Requests\SystemRight\UpdateSystemRight;
 use App\Models\SystemRight;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
@@ -16,15 +18,43 @@ class SystemRightController extends Controller
         return view('admin.right.index',['lists'=>$lists]);
     }
 
-    public function add()
+    public function create()
     {
-        return view('admin.right.add');
+        return view('admin.right.create');
     }
 
     public function edit($id)
     {
         $info = SystemRight::findOrFail($id);
         return view('admin.right.edit',['info'=>$info]);
+    }
+
+    public function store(StoreSystemRight $request)
+    {
+        $systemRight = new SystemRight;
+        $systemRight->name = $request['name'];
+        $systemRight->group = $request['group'];
+        $systemRight->right = implode(';',$request['right']);
+        $systemRight->order_id = $request['order_id'];
+        $data = $systemRight->save();
+        return response()->json($data);
+    }
+
+    public function update(UpdateSystemRight $request,$id)
+    {
+        $input = $request->all();
+        $systemRight = SystemRight::find($id);
+        $systemRight->name = $input['name'];
+        $systemRight->group = $input['group'];
+        $systemRight->right = implode(';',$input['right']);
+        $systemRight->order_id = $input['order_id'];
+        $data = $systemRight->save();
+        return response()->json($data);
+    }
+
+    public function destory()
+    {
+        echo '删除方法';
     }
 
     /**
@@ -34,9 +64,9 @@ class SystemRightController extends Controller
     public function getAllController()
     {
         $controllers = Cache::remember('adminControllerList', 600, function () {
-            $getAllController = function ($path = '') use (&$controllerList,&$getAllController){
+            $getAllController = function ($path = null) use (&$controllerList,&$getAllController){
                 $controllerPath = app_path().'/Http/Controllers/Admin'.($path ? '/'.$path : '');
-                $namespace = 'App\Http\Controllers\Admin\\'.($path ? $path.'\\':'');
+                $namespace = 'App\Http\Controllers\Admin\\'.($path ? $path.'\\' : '');
                 $dirRes   = opendir($controllerPath);
                 while($dir = readdir($dirRes)){
                     if(!in_array($dir,['.','..'])){
@@ -71,15 +101,5 @@ class SystemRightController extends Controller
             return $allMethod;
         });
         return Response::json($methods);
-    }
-
-    public function update()
-    {
-        echo '更新方法';
-    }
-
-    public function destory()
-    {
-        echo '删除方法';
     }
 }

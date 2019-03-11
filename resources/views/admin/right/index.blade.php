@@ -5,8 +5,8 @@
             <div class="Manager_style">
                 <div class="title_name">菜单列表</div>
                 <a href="javascript:location.reload();" class="flash" title="刷新"></a>
-                <button  type="button" class="btn btn-primary btn-redirect btn-current" name="{{ url('admin/rights/index') }}">权限列表</button>
-                <button  type="button" class="btn btn-primary btn-redirect" name="{{ url('admin/rights/add') }}">添加权限</button>
+                <button  type="button" class="btn btn-primary btn-redirect btn-current" name="{{ url('admin/rights') }}">权限列表</button>
+                <button  type="button" class="btn btn-primary btn-redirect" name="{{ url('admin/rights/create') }}">添加权限</button>
             </div>
             <div class="Manager_style">
                 <div class="title_name">权限列表</div>
@@ -22,6 +22,12 @@
                                     <label class="v-lab">所属分组</label>
                                     <select name="groups" class="v-sel" default="0">
                                         <option value="0">全部</option>
+                                        @foreach (right_group() as $k=>$v)
+                                            <option value="{{ $k }}">|--{{ $v['name'] }}</option>
+                                            @foreach ($v['menu'] as $k1=>$v1)
+                                                <option value="{{ $k.'@'.$k1 }}">|----{{ $v1['name'] }}</option>
+                                            @endforeach
+                                        @endforeach
                                     </select>
                                 </section>
                             </div>
@@ -36,7 +42,6 @@
                                 <th>选择</th>
                                 <th>ID</th>
                                 <th>名称</th>
-                                <th>资源类型</th>
                                 <th>所属分组</th>
                                 <th>权限码</th>
                                 <th>排序</th>
@@ -49,15 +54,14 @@
                                     <td><input type="checkbox" name="checkbox" data-id="{{ $vo['id'] }}"/></td>
                                     <td>{{ $vo['id'] }}</td>
                                     <td>{{ $vo['name'] }}</td>
-                                    <td>{{ $vo['type'] }}</td>
-                                    <td>分组</td>
+                                    <td>{{ right_group($vo['group']) }}</td>
                                     <td>{{ $vo['right'] }}</td>
                                     <td class="edit_order" data-table="system_right" data-id="{{ $vo['id'] }}" data-value="{{ $vo['order_id'] }}" data-key="order_id">
                                         <span>{{ $vo['order_id'] }}</span>
-                                        <input type="text" name="order_id" style="width: 60px;display: none;" class="edit_order_input" value="{$vo['order_id']}" />
+                                        <input type="text" name="order_id" style="width: 60px;display: none;" class="edit_order_input" value="{{ $vo['order_id'] }}" />
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-redirect" name="{{ url('admin/rights/edit',['id'=>$vo['id']]) }}">修改</button>
+                                        <button type="button" class="btn btn-primary btn-redirect" name="{{ url("admin/rights/$vo[id]/edit") }}">修改</button>
                                         <button type="button" class="btn btn-warning btn-delete" name="{{ url('admin/rights/destory',['id'=>$vo['id']]) }}">删除</button>
                                     </td>
                                 </tr>
