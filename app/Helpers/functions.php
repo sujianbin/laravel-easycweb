@@ -1,6 +1,8 @@
 <?php
 
     use Illuminate\Support\Facades\Cache;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Log;
     /**
      * 获取权限分组
      */
@@ -124,6 +126,34 @@
                     ]
                 ]
             ];
+        }
+    }
+
+    /**
+    * 获取执行的sql语句
+     * 当前方法放在执行的语句前
+    */
+    if(!function_exists('getLastSql')){
+        function getLastSql ($file = false) {
+            DB::listen(function ($query) use ($file) {
+                $tmp = str_replace('?', '"'.'%s'.'"', $query->sql);
+                $qBindings = [];
+                foreach ($query->bindings as $key => $value) {
+                    if (is_numeric($key)) {
+                        $qBindings[] = $value;
+                    } else {
+                        $tmp = str_replace(':'.$key, '"'.$value.'"', $tmp);
+                    }
+                }
+                $tmp = vsprintf($tmp, $qBindings);
+                $tmp = str_replace("\\", "", $tmp);
+                $tmp = 'execution time: '.$query->time.'ms; run sql：'.$tmp;
+                if($file === true){
+                    Log::channel('sql')->info($tmp."\n\n\t");
+                }else{
+                    echo $tmp.'<br />';
+                }
+            });
         }
     }
 

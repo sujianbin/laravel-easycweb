@@ -89,6 +89,20 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'notify' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/notify/notify.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        'sql' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/sql/sql.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
     ],
 
 ];

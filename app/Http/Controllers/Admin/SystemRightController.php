@@ -7,14 +7,22 @@ use App\Http\Requests\SystemRight\UpdateSystemRight;
 use App\Models\SystemRight;
 use Illuminate\Support\Facades\Cache;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Route;
-use Response;
+use Illuminate\Http\Request;
 
 class SystemRightController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $lists = SystemRight::paginate();
+        $group = $request->input('groups');
+        $name = $request->input('name');
+        $lists = SystemRight
+            ::when($group, function ($query, $group){
+                return $query->where("group","like",$group.'@%');
+            })
+            ->when($name, function ($query, $name) {
+                return $query->where("name","like","%{$name}%");
+            })
+            ->paginate();
         return view('admin.right.index',['lists'=>$lists]);
     }
 
@@ -81,7 +89,7 @@ class SystemRightController extends Controller
             };
             return $getAllController();
         });
-        return Response::json($controllers);
+        return response()->json($controllers);
     }
 
     /**
@@ -100,6 +108,6 @@ class SystemRightController extends Controller
             }
             return $allMethod;
         });
-        return Response::json($methods);
+        return response()->json($methods);
     }
 }

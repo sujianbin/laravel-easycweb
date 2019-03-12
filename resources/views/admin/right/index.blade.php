@@ -5,8 +5,8 @@
             <div class="Manager_style">
                 <div class="title_name">菜单列表</div>
                 <a href="javascript:location.reload();" class="flash" title="刷新"></a>
-                <button  type="button" class="btn btn-primary btn-redirect btn-current" name="{{ url('admin/rights') }}">权限列表</button>
-                <button  type="button" class="btn btn-primary btn-redirect" name="{{ url('admin/rights/create') }}">添加权限</button>
+                <button  type="button" class="btn btn-primary btn-redirect btn-current" name="{{ route('rights.index') }}">权限列表</button>
+                <button  type="button" class="btn btn-primary btn-redirect" name="{{ route('rights.create') }}">添加权限</button>
             </div>
             <div class="Manager_style">
                 <div class="title_name">权限列表</div>
@@ -20,7 +20,7 @@
                                 </section>
                                 <section class="v-block">
                                     <label class="v-lab">所属分组</label>
-                                    <select name="groups" class="v-sel" default="0">
+                                    <select name="groups" class="v-sel" default="{{ request()->input('groups') }}">
                                         <option value="0">全部</option>
                                         @foreach (right_group() as $k=>$v)
                                             <option value="{{ $k }}">|--{{ $v['name'] }}</option>
@@ -61,7 +61,7 @@
                                         <input type="text" name="order_id" style="width: 60px;display: none;" class="edit_order_input" value="{{ $vo['order_id'] }}" />
                                     </td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-redirect" name="{{ url("admin/rights/$vo[id]/edit") }}">修改</button>
+                                        <button type="button" class="btn btn-primary btn-redirect" name="{{ route('rights.edit',['id'=>$vo['id']]) }}">修改</button>
                                         <button type="button" class="btn btn-warning btn-delete" name="{{ url('admin/rights/destory',['id'=>$vo['id']]) }}">删除</button>
                                     </td>
                                 </tr>

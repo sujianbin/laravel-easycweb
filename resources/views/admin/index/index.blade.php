@@ -46,10 +46,10 @@
                             <a href="javascript:;" name="{{ url('admin/admin/index') }}" title="管理员管理" class="iframeurl">管理员管理</a>
                         </li>
                         <li>
-                            <a href="javascript:;" name="{{ url('admin/role/index') }}" title="角色管理" class="iframeurl">角色管理</a>
+                            <a href="javascript:;" name="{{ url('admin/role/role') }}" title="角色管理" class="iframeurl">角色管理</a>
                         </li>
                         <li>
-                            <a href="javascript:;" name="{{ url('admin/rights') }}" title="权限管理" class="iframeurl">权限管理</a>
+                            <a href="javascript:;" name="{{ url('admin/rights/rights') }}" title="权限管理" class="iframeurl">权限管理</a>
                         </li>
                     </ul>
                 </li>

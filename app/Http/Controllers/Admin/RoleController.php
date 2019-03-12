@@ -14,15 +14,25 @@ class RoleController extends Controller
         return view('admin.role.index',['lists'=>$lists]);
     }
 
-    public function add()
+    public function create()
     {
-        return view('admin.role.add');
+        return view('admin.role.create');
     }
 
     public function edit($id)
     {
         $info = AdminRole::findOrFail($id);
         return view('admin.role.edit',['info'=>$info]);
+    }
+
+    public function store()
+    {
+        echo '新增方法';
+    }
+
+    public function update()
+    {
+        echo "更新方法";
     }
 
     public function destory()
