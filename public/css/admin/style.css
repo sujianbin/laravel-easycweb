@@ -871,11 +871,11 @@ select,textarea, input[type="text"], input[type="password"], input[type="datetim
     border-left: 1px solid #ddd;
 }
 
-#Role_list1 dl.purview dd label{
+#Role_list1 dl.purview dd label,#Role_list1 dl.purview div label{
     display: inline-block;
     line-height: 40px;
 }
-#Role_list1 dl.purview dd label input{
+#Role_list1 dl.purview dd label input,#Role_list1 dl.purview div label input{
     float: left;
     margin-left: 10px;
     margin-top: 14px;

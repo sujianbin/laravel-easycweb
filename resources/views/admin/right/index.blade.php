@@ -55,7 +55,7 @@
                                     <td>{{ $vo['id'] }}</td>
                                     <td>{{ $vo['name'] }}</td>
                                     <td>{{ right_group($vo['group']) }}</td>
-                                    <td>{{ $vo['right'] }}</td>
+                                    <td>{{ Str::limit($vo['right'],50) }}</td>
                                     <td class="edit_order" data-table="system_right" data-id="{{ $vo['id'] }}" data-value="{{ $vo['order_id'] }}" data-key="order_id">
                                         <span>{{ $vo['order_id'] }}</span>
                                         <input type="text" name="order_id" style="width: 60px;display: none;" class="edit_order_input" value="{{ $vo['order_id'] }}" />

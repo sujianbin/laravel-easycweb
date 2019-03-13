@@ -10,6 +10,7 @@ class RoleController extends Controller
 {
     public function index()
     {
+        dd(right_group_rights());
         $lists = AdminRole::paginate();
         return view('admin.role.index',['lists'=>$lists]);
     }
