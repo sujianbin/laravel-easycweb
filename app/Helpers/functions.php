@@ -168,7 +168,7 @@
                     foreach ($v['menu'] as $k1=>$v1){
                         foreach ($v1['item'] as $k2=>$v2){
                             $key = "{$k}@{$k1}@{$k2}";
-                            $rightGroupRights[$k]['menu'][$k1]['item'][$k2.'_rights'] = DB::table("system_right")->where("group",$key)->pluck('name','id');
+                            $rightGroupRights[$k]['menu'][$k1][$k2.'_rights'] = DB::table("system_right")->where("group",$key)->pluck('name','id');
                         }
                     }
                 }

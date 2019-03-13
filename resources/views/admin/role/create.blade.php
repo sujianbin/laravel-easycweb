@@ -11,9 +11,10 @@
             <div class="Manager_style">
                 <div class="title_name">编辑角色</div>
                 <div class="Role_list">
-                    <form name="myform" action="{{ route('role.store') }}" method="post">
+                    <form id="submit-form" name="myform" action="{{ route('role.store') }}" method="post">
                         @include("admin.role.form");
                         <div class="btn_operating">
+                            {{ csrf_field() }}
                             <input  type="submit" class="btn btn-primary btn-submit"/>
                             <input  type="reset" class="btn btn-warning"/>
                         </div>
