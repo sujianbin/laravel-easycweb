@@ -31,48 +31,67 @@
                 </label>
                 <br/><br/>
 
-                <dl class="purview" style="margin-left: 10px;">
-                    <dt>
-                        <label>
-                            <input class="all" type="checkbox" value=""/>
-                            <span>全选/反选（小说管理）</span>
-                        </label>
-                    </dt>
+                @foreach(right_group_rights() as $k=>$v)
+                    @foreach($v['menu'] as $k1=>$v1)
+                        <dl class="purview" style="margin-left: 10px;">
+                            <dt>
+                                <label>
+                                    <input class="all" type="checkbox" value=""/>
+                                    <span>{{ $v1['name'] }}</span>
+                                </label>
+                            </dt>
 
-                    <dd>
-                        <label>
-                            <input name="right[]" type="checkbox" value="1" />
-                            <span style="float: left;margin-right: 15px;">添加</span>
-                        </label>
-                        <label>
-                            <input name="right[]" type="checkbox" value="1" />
-                            <span style="float: left;margin-right: 15px;">修改</span>
-                        </label>
-                    </dd>
-                </dl>
+                            <dt style="overflow: hidden;border-left: 1px solid #ddd;width: 80%;">
+                                @foreach($v1['item'] as $k2=>$v2)
+                                    <div class="s-right" style="border-bottom: 1px solid #ddd;">
+                                        <label>
+                                            <input class="all" type="checkbox" value=""/>
+                                            <span>{{ $v2 }}</span>
+                                        </label>
 
-                <dl class="purview" style="margin-left: 10px;">
-                    <dt>
-                        <label>
-                            <input class="all" type="checkbox"  value=""/>
-                            <span>全选/反选（会员管理）</span>
-                        </label>
-                    </dt>
-
-                    <dd>
-                        <label>
-                            <input name="right[]" type="checkbox" value="1" />
-                            <span style="float: left;margin-right: 15px;">删除</span>
-                        </label>
-                        <label>
-                            <input name="right[]" type="checkbox" value="1" />
-                            <span style="float: left;margin-right: 15px;">修改</span>
-                        </label>
-                    </dd>
-                </dl>
-
+                                        <div style="margin-left: 20px;">
+                                            @if(isset($v1['item'][$k2][$k2.'_rights']))
+                                                @foreach($v1['item'][$k2][$k2.'_rights'] as $k3=>$v3)
+                                                    <label>
+                                                        <input name="right[]" type="checkbox" value="{{ $k3 }}" />
+                                                        <span style="float: left;margin-right: 15px;">{{ $v3 }}</span>
+                                                    </label>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </dt>
+                        </dl>
+                    @endforeach
+                @endforeach
                 <span class="ps">权限资源必选</span>
             </td>
         </tr>
+
     </tbody>
 </table>
+@push('footscripts')
+    <script type="text/javascript">
+        $(function(){
+            $("#all").bind("click",function(){
+                $("input[name='right[]']").each(function(){
+                    if($(this).attr("checked")){
+                        this.checked = false;
+                    }else{
+                        this.checked = true;
+                    }
+                });
+            });
+            $(".all").bind("click",function(){
+                $(this).parents("dl.purview").find("input[name='right[]']").each(function(){
+                    if($(this).attr("checked")){
+                        this.checked = false;
+                    }else{
+                        this.checked = true;
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

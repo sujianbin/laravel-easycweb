@@ -130,9 +130,9 @@
     }
 
     /**
-    * 获取执行的sql语句
+     * 获取执行的sql语句
      * 当前方法放在执行的语句前
-    */
+     */
     if(!function_exists('getLastSql')){
         function getLastSql ($file = false) {
             DB::listen(function ($query) use ($file) {
@@ -154,6 +154,27 @@
                     echo $tmp.'<br />';
                 }
             });
+        }
+    }
+
+    /**
+     * 获取权限分组对应权限列表
+     */
+    if(!function_exists('right_group_rights')){
+        function right_group_rights(){
+            $rightGroupRights = Cache::remember('admin_right_group_rights','600', function () {
+                $rightGroupRights = right_group();
+                foreach ($rightGroupRights as $k=>$v){
+                    foreach ($v['menu'] as $k1=>$v1){
+                        foreach ($v1['item'] as $k2=>$v2){
+                            $key = "{$k}@{$k1}@{$k2}";
+                            $rightGroupRights[$k]['menu'][$k1]['item'][$k2.'_rights'] = DB::table("system_right")->where("group",$key)->pluck('name','id');
+                        }
+                    }
+                }
+                return $rightGroupRights;
+            });
+            return $rightGroupRights;
         }
     }
 
