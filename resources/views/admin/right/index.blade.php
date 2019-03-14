@@ -62,7 +62,7 @@
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-redirect" name="{{ route('rights.edit',['id'=>$vo['id']]) }}">修改</button>
-                                        <button type="button" class="btn btn-warning btn-delete" name="{{ url('admin/rights/destory',['id'=>$vo['id']]) }}">删除</button>
+                                        <button type="button" class="btn btn-warning btn-delete" data-id="{{ $vo['id'] }}" name="{{ route('rights.destroy',['id'=>$vo['id']]) }}">删除</button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -71,7 +71,7 @@
                     {{ $lists->links() }}
                     <div class="all-operate">
                         <label class="list-all-check"><input type="checkbox" id="checkbox"/><em>全选/反选</em></label>
-                        <button id="mutidels" data-url="{{ url('admin/rights/destory') }}">批量删除</button>
+                        <button id="mutidels" data-url="{{ route('rights.destroy',['id'=>0]) }}">批量删除</button>
                     </div>
                 </div>
             </div>

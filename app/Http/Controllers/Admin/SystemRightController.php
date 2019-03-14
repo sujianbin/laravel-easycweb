@@ -60,9 +60,13 @@ class SystemRightController extends Controller
         return response()->json($data);
     }
 
-    public function destory()
+    public function destroy($id)
     {
-        echo '删除方法';
+        $info = [
+            'code'=>200,
+            'msg'=>'删除成功'
+        ];
+        return response()->json($info);
     }
 
     /**
