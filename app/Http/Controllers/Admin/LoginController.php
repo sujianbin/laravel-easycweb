@@ -50,4 +50,10 @@ class LoginController extends Controller
             return view('admin.login.login');
         }
     }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('login');
+    }
 }

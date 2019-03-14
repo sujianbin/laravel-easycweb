@@ -23,11 +23,11 @@
             </ul>
         </div>
         <div class="header-right">
-            <div class="header-right-top"> <em class="time"></em><span class="author">欢迎使用,11</span></div>
+            <div class="header-right-top"> <em class="time"></em><span class="author">欢迎使用,{{ Auth::guard('admin')->user()->username }}</span></div>
             <div class="header-right-nav">
                 <ul>
-                    <li><a href='javascript:;' id="change-password" name="{{ url('admin/adminModify',['id'=>1]) }}" title="修改密码">修改密码</a></li>
-                    <li><a href='javascript:;' id="exit-system" title="退出系统">退出系统</a></li>
+                    <li><a href='javascript:;' id="change-password" name="{{ url('admin/admin/editPwd') }}" title="修改密码">修改密码</a></li>
+                    <li><a href='{{ url('admin/logout') }}' id="exit-system" title="退出系统">退出系统</a></li>
                     <li><a href='javascript:;' id="clear-flash" title="清除缓存">清除缓存</a></li>
                     <li><a href='/' target="_blank" title="网站首页">网站首页</a></li>
                 </ul>
@@ -43,7 +43,7 @@
                     <a href="javascript:;" class="icon-menu">权限管理</a>
                     <ul class="submenu">
                         <li>
-                            <a href="javascript:;" name="{{ url('admin/admin/index') }}" title="管理员管理" class="iframeurl">管理员管理</a>
+                            <a href="javascript:;" name="{{ url('admin/admin/admin') }}" title="管理员管理" class="iframeurl">管理员管理</a>
                         </li>
                         <li>
                             <a href="javascript:;" name="{{ url('admin/role/role') }}" title="角色管理" class="iframeurl">角色管理</a>

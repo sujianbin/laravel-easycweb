@@ -12,7 +12,7 @@
                 <div class="title_name">编辑角色</div>
                 <div class="Role_list">
                     <form id="submit-form" name="myform" action="{{ route('role.store') }}" method="post">
-                        @include("admin.role.form");
+                        @include("admin.role.form")
                         <div class="btn_operating">
                             {{ csrf_field() }}
                             <input  type="submit" class="btn btn-primary btn-submit"/>

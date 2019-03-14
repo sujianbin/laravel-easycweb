@@ -44,7 +44,11 @@ class RoleController extends Controller
         $role = AdminRole::find($id);
         $role->role_name = $request['role_name'];
         $role->role_description = $request['role_description'];
-        $role->right = implode(',',$request['right']);
+        if($id == 1){//超级管理员的权限为0
+            $role->right = 0;
+        }else{
+            $role->right = implode(',',$request['right']);
+        }
         $data = $role->save();
         return response()->json($data);
     }
