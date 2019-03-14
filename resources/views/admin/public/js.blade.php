@@ -227,7 +227,16 @@
                             location.reload();
                         },1500);
                     }else{
-                        layer.msg('保存失败');
+                        if(data.code == 200){
+                            layer.msg(data.msg);
+                            setTimeout(function () {
+                                location.reload();
+                            },1500);
+                        }else if(data.code == 101){
+                            layer.msg(data.msg);
+                        }else{
+                            layer.msg('保存失败');
+                        }
                     }
                 },
                 error:function (e) {

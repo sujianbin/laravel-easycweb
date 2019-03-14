@@ -178,3 +178,18 @@
         }
     }
 
+    /**
+     * 当前权限是否选中
+     */
+    if(!function_exists('right_group_rights_checked')){
+        function right_group_rights_checked($right,$rights){
+            if($rights == 0){
+                return true;
+            }else{
+                $rights = explode(',',$rights);
+                return in_array($right,$rights);
+            }
+            return false;
+        }
+    }
+

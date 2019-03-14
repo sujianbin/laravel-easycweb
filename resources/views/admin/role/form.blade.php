@@ -53,7 +53,11 @@
                                             @if(isset($v1[$k2.'_rights']))
                                                 @foreach($v1[$k2.'_rights'] as $k3=>$v3)
                                                     <label>
-                                                        <input name="right[]" type="checkbox" value="{{ $k3 }}" />
+                                                        @if(isset($info['right']) && right_group_rights_checked($k3,$info['right']))
+                                                            <input name="right[]" type="checkbox" checked value="{{ $k3 }}" />
+                                                        @else
+                                                            <input name="right[]" type="checkbox" value="{{ $k3 }}" />
+                                                        @endif
                                                         <span style="float: left;margin-right: 15px;">{{ $v3 }}</span>
                                                     </label>
                                                 @endforeach
