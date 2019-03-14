@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\Role\StoreRole;
+use App\Http\Requests\Role\UpdateRole;
 use App\Models\AdminRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,7 +12,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        dd(right_group_rights());
+        //dd(right_group_rights());
         $lists = AdminRole::paginate();
         return view('admin.role.index',['lists'=>$lists]);
     }
@@ -26,14 +28,25 @@ class RoleController extends Controller
         return view('admin.role.edit',['info'=>$info]);
     }
 
-    public function store()
+    public function store(StoreRole $request)
     {
-        echo '新增方法';
+        $role = new AdminRole;
+        $role->role_name = $request['role_name'];
+        $role->role_description = $request['role_description'];
+        $role->right = implode(',',$request['right']);
+        $data = $role->save();
+        return response()->json($data);
     }
 
-    public function update()
+    public function update(UpdateRole $request,$id)
     {
-        echo "更新方法";
+        $input = $request->all();
+        $role = AdminRole::find($id);
+        $role->role_name = $request['role_name'];
+        $role->role_description = $request['role_description'];
+        $role->right = implode(',',$request['right']);
+        $data = $role->save();
+        return response()->json($data);
     }
 
     public function destory()

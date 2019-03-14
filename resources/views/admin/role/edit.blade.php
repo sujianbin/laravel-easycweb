@@ -11,8 +11,10 @@
             <div class="Manager_style">
                 <div class="title_name">编辑角色</div>
                 <div class="Role_list">
-                    <form name="myform" action="{{ route('role.update',$info) }}" method="post">
+                    <form id="submit-form" name="myform" action="{{ route('role.update',$info) }}" method="PATCH">
+                        @include('admin.role.form');
                         <div class="btn_operating">
+                            {{ csrf_field() }}
                             <input  type="submit" class="btn btn-primary btn-submit"/>
                             <input  type="reset" class="btn btn-warning"/>
                         </div>
@@ -22,27 +24,3 @@
         </div>
     </div>
 @endsection
-@push('footscripts')
-    <script type="text/javascript">
-        $(function(){
-            $("#all").bind("click",function(){
-                $("input[name='right[]']").each(function(){
-                    if($(this).attr("checked")){
-                        this.checked = false;
-                    }else{
-                        this.checked = true;
-                    }
-                });
-            });
-            $(".all").bind("click",function(){
-                $(this).parents("dl.purview").find("input[name='right[]']").each(function(){
-                    if($(this).attr("checked")){
-                        this.checked = false;
-                    }else{
-                        this.checked = true;
-                    }
-                });
-            });
-        });
-    </script>
-@endpush

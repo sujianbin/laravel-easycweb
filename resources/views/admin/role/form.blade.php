@@ -23,7 +23,7 @@
         </tr>
 
         <tr>
-            <th width="28%">权限资源</th>
+            <th width="20%">权限资源</th>
             <td>
                 <label>
                     <input id="all" type="checkbox"  value="" style="float: left;margin-left: 10px;"/>
@@ -34,14 +34,14 @@
                 @foreach(right_group_rights() as $k=>$v)
                     @foreach($v['menu'] as $k1=>$v1)
                         <dl class="purview" style="margin-left: 10px;">
-                            <dt>
+                            <dt style="width:15%;">
                                 <label>
                                     <input class="all" type="checkbox" value=""/>
                                     <span>{{ $v1['name'] }}</span>
                                 </label>
                             </dt>
 
-                            <dt style="overflow: hidden;border-left: 1px solid #ddd;width: 80%;">
+                            <dt style="overflow: hidden;border-left: 1px solid #ddd;width: 75%;">
                                 @foreach($v1['item'] as $k2=>$v2)
                                     <div class="s-right" style="border-bottom: 1px solid #ddd;">
                                         <label>
@@ -50,8 +50,8 @@
                                         </label>
 
                                         <div style="margin-left: 20px;">
-                                            @if(isset($v1['item'][$k2][$k2.'_rights']))
-                                                @foreach($v1['item'][$k2][$k2.'_rights'] as $k3=>$v3)
+                                            @if(isset($v1[$k2.'_rights']))
+                                                @foreach($v1[$k2.'_rights'] as $k3=>$v3)
                                                     <label>
                                                         <input name="right[]" type="checkbox" value="{{ $k3 }}" />
                                                         <span style="float: left;margin-right: 15px;">{{ $v3 }}</span>
