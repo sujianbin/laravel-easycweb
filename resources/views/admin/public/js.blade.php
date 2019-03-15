@@ -64,11 +64,13 @@
                     data:{id:id},
                     dataType:'json',
                     success:function (data) {
-                        if(data.code == 200){
-                            layer.msg(data.msg);
+                        if(data){
+                            layer.msg('删除成功');
                             setTimeout(function () {
                                 location.reload();
                             },2000);
+                        }else{
+                            layer.msg('删除失败');
                         }
                     },
                     error:function (e) {
@@ -178,23 +180,44 @@
 
         //批量删除
         $("#mutidels").bind('click',function () {
-            var ids = '';
+            var ids = [];
             $("input[name=checkbox]").each(function () {
                 if($(this).prop("checked")){
-                    ids += ',' + $(this).data("id");
+                    ids.push($(this).data("id"));
                 }
             });
+            console.info(ids);
             var url = $(this).data("url");
-            if(ids == ''){
+            if(ids.length == 0){
                 layer.msg('请选择要删除的数据',{icon:2,time:2000});
             }else{
-                ids = ids.substr(1);
                 layer.confirm('确定删除所选吗?', {
-                        btn: ['是','否']
-                    },
-                    function(){
-                        location.href = url + "?id=" + ids;
+                    btn: ['是','否']
+                },
+                function(){
+                    $.ajax({
+                        type:'DELETE',
+                        url:url+'/'+JSON.stringify(ids),
+                        data:{ids:ids},
+                        dataType:'json',
+                        success:function (data) {
+                            console.info(data);
+                            return false;
+                            if(data){
+                                layer.msg('成功删除'+data+'条数据');
+                                setTimeout(function () {
+                                    location.reload();
+                                },2000);
+                            }else{
+                                layer.msg('删除失败');
+                            }
+                        },
+                        error:function (e) {
+                            console.info(e);
+                            layer.msg('请求失败，请稍后重试');
+                        }
                     });
+                });
             }
         });
 

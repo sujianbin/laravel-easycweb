@@ -60,12 +60,10 @@ class SystemRightController extends Controller
         return response()->json($data);
     }
 
-    public function destroy($id)
+    public function destroy($ids)
     {
-        $info = [
-            'code'=>200,
-            'msg'=>'删除成功'
-        ];
+        $ids = is_array($ids) ? $ids : func_get_arg(0);
+        $info = SystemRight::destroy($ids);
         return response()->json($info);
     }
 

@@ -71,7 +71,7 @@
                     {{ $lists->links() }}
                     <div class="all-operate">
                         <label class="list-all-check"><input type="checkbox" id="checkbox"/><em>全选/反选</em></label>
-                        <button id="mutidels" data-url="{{ route('rights.destroy',['id'=>0]) }}">批量删除</button>
+                        <button id="mutidels" data-url="{{ url('admin/rights/rights') }}">批量删除</button>
                     </div>
                 </div>
             </div>
