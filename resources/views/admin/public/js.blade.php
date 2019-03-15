@@ -56,8 +56,26 @@
         //删除跳转方法
         $(".btn-delete").click(function () {
             var url = $(this).attr('name');
+            var id = $(this).data('id');
             layer.confirm('你确定要删除吗？', function(index){
-                location.href = url;
+                $.ajax({
+                    type:'DELETE',
+                    url:url,
+                    data:{id:id},
+                    dataType:'json',
+                    success:function (data) {
+                        if(data.code == 200){
+                            layer.msg(data.msg);
+                            setTimeout(function () {
+                                location.reload();
+                            },2000);
+                        }
+                    },
+                    error:function (e) {
+                        console.info(e);
+                        layer.msg('请求失败，请稍后重试');
+                    }
+                });
                 layer.close(index);
             });
         });

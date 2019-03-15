@@ -53,8 +53,12 @@ class RoleController extends Controller
         return response()->json($data);
     }
 
-    public function destory()
+    public function destory($id)
     {
-        echo '删除方法';
+        $info = [
+            'code'=>200,
+            'msg'=>'删除成功'
+        ];
+        return response()->json($info);
     }
 }
