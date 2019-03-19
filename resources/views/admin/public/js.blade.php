@@ -64,18 +64,19 @@
                     data:{id:id},
                     dataType:'json',
                     success:function (data) {
-                        if(data){
+                        if(data == true){
                             layer.msg('删除成功');
                             setTimeout(function () {
                                 location.reload();
                             },2000);
                         }else{
-                            layer.msg('删除失败');
+                            layer.msg(data);
                         }
                     },
                     error:function (e) {
                         console.info(e);
-                        layer.msg('请求失败，请稍后重试');
+                        var message = $.parseJSON(e.responseText);
+                        layer.msg(message.message);
                     }
                 });
                 layer.close(index);
@@ -202,7 +203,6 @@
                         dataType:'json',
                         success:function (data) {
                             console.info(data);
-                            return false;
                             if(data){
                                 layer.msg('成功删除'+data+'条数据');
                                 setTimeout(function () {
@@ -214,7 +214,8 @@
                         },
                         error:function (e) {
                             console.info(e);
-                            layer.msg('请求失败，请稍后重试');
+                            var message = $.parseJSON(e.responseText);
+                            layer.msg(message.message);
                         }
                     });
                 });
@@ -290,6 +291,26 @@
                 }
             });
             return false;
+        });
+
+        //清除缓存
+        $("#clear-flash").bind('click',function () {
+            layer.confirm('确定要清除视图缓存？若要清理其他缓存请联系管理员处理！', function(index){
+                $.ajax({
+                    type:'POST',
+                    url:"{{ url('admin/clearCache') }}",
+                    data:{},
+                    success:function (data) {
+                        layer.msg(data);
+                    },
+                    error:function (e) {
+                        console.info(e);
+                        var message = $.parseJSON(e.responseText);
+                        layer.msg(message.message);
+                    }
+                });
+                layer.close(index);
+            });
         });
     });
 

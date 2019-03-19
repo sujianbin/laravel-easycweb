@@ -33,6 +33,8 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
         Route::get('/','IndexController@index');
         Route::get('index','IndexController@index');
         Route::get('centos','IndexController@centos');
+        //清理视图缓存
+        Route::post('clearCache','IndexController@clearCache');
         //权限管理
         Route::group(['prefix'=>'rights'], function () {
             Route::resource("rights",'SystemRightController',['except'=>['show']]);

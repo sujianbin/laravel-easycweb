@@ -16,14 +16,14 @@ class SystemRightController extends Controller
         $group = $request->input('groups');
         $name = $request->input('name');
         $lists = SystemRight
-            ::when($group, function ($query, $group){
-                return $query->where("group","like",$group.'@%');
+            ::when($group, function ($query, $group) {
+                return $query->where("group", "like", $group . '@%');
             })
             ->when($name, function ($query, $name) {
-                return $query->where("name","like","%{$name}%");
+                return $query->where("name", "like", "%{$name}%");
             })
             ->paginate();
-        return view('admin.right.index',['lists'=>$lists]);
+        return view('admin.right.index', ['lists' => $lists]);
     }
 
     public function create()
@@ -34,7 +34,7 @@ class SystemRightController extends Controller
     public function edit($id)
     {
         $info = SystemRight::findOrFail($id);
-        return view('admin.right.edit',['info'=>$info]);
+        return view('admin.right.edit', ['info' => $info]);
     }
 
     public function store(StoreSystemRight $request)
@@ -42,19 +42,19 @@ class SystemRightController extends Controller
         $systemRight = new SystemRight;
         $systemRight->name = $request['name'];
         $systemRight->group = $request['group'];
-        $systemRight->right = implode(';',$request['right']);
+        $systemRight->right = implode(';', $request['right']);
         $systemRight->order_id = $request['order_id'];
         $data = $systemRight->save();
         return response()->json($data);
     }
 
-    public function update(UpdateSystemRight $request,$id)
+    public function update(UpdateSystemRight $request, $id)
     {
         $input = $request->all();
         $systemRight = SystemRight::find($id);
         $systemRight->name = $input['name'];
         $systemRight->group = $input['group'];
-        $systemRight->right = implode(';',$input['right']);
+        $systemRight->right = implode(';', $input['right']);
         $systemRight->order_id = $input['order_id'];
         $data = $systemRight->save();
         return response()->json($data);
@@ -62,7 +62,7 @@ class SystemRightController extends Controller
 
     public function destroy($ids)
     {
-        $ids = is_array($ids) ? $ids : func_get_arg(0);
+        $ids = request()->has('ids') ? request()->get('ids') : $ids;
         $info = SystemRight::destroy($ids);
         return response()->json($info);
     }
@@ -74,16 +74,16 @@ class SystemRightController extends Controller
     public function getAllController()
     {
         $controllers = Cache::remember('adminControllerList', 600, function () {
-            $getAllController = function ($path = null) use (&$controllerList,&$getAllController){
-                $controllerPath = app_path().'/Http/Controllers/Admin'.($path ? '/'.$path : '');
-                $namespace = 'App\Http\Controllers\Admin\\'.($path ? $path.'\\' : '');
-                $dirRes   = opendir($controllerPath);
-                while($dir = readdir($dirRes)){
-                    if(!in_array($dir,['.','..'])){
-                        if(is_dir($controllerPath.'/'.$dir)){
+            $getAllController = function ($path = null) use (&$controllerList, &$getAllController) {
+                $controllerPath = app_path() . '/Http/Controllers/Admin' . ($path ? '/' . $path : '');
+                $namespace = 'App\Http\Controllers\Admin\\' . ($path ? $path . '\\' : '');
+                $dirRes = opendir($controllerPath);
+                while ($dir = readdir($dirRes)) {
+                    if (!in_array($dir, ['.', '..'])) {
+                        if (is_dir($controllerPath . '/' . $dir)) {
                             $controllerList = $getAllController($dir);
-                        }else{
-                            $controllerList[] = $namespace.basename($dir,'.php');
+                        } else {
+                            $controllerList[] = $namespace . basename($dir, '.php');
                         }
                     }
                 }
@@ -101,11 +101,11 @@ class SystemRightController extends Controller
     public function getControllerMethod()
     {
         $controller = request()->input('controller');
-        $methods = Cache::remember('admin'.$controller.'Methods',600, function () use ($controller) {
+        $methods = Cache::remember('admin' . $controller . 'Methods', 600, function () use ($controller) {
             $method = get_class_methods($controller);
             $allMethod = [];
-            foreach ($method as $v){
-                if($v == 'middleware') break;
+            foreach ($method as $v) {
+                if ($v == 'middleware') break;
                 $allMethod[] = $v;
             }
             return $allMethod;

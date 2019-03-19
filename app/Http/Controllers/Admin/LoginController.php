@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST') {
             $input = Input::all();
             $messages = [
                 'username.required' => '用户名不能为空',
@@ -26,19 +26,19 @@ class LoginController extends Controller
                 'code' => 'required|captcha'
             ];
             $validator = Validator::make($input, $rules, $messages);
-            if($validator->fails()){
+            if ($validator->fails()) {
                 $info = [
                     'code' => 101,
                     'msg' => $validator->getMessageBag()->first()
                 ];
-            }else{
+            } else {
                 //$admin = Admin::where('username',$input['username'])->first();
-                if(Auth::guard('admin')->attempt(['username'=>$input['username'],'password'=>$input['pwd']])){
+                if (Auth::guard('admin')->attempt(['username' => $input['username'], 'password' => $input['pwd']])) {
                     $info = [
                         'code' => 0,
                         'msg' => '验证成功'
                     ];
-                }else{
+                } else {
                     $info = [
                         'code' => 101,
                         'msg' => '用户名或者密码错误'
@@ -46,7 +46,7 @@ class LoginController extends Controller
                 }
             }
             return response()->json($info);
-        }else{
+        } else {
             return view('admin.login.login');
         }
     }

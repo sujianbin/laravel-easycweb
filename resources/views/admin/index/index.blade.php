@@ -38,64 +38,24 @@
         <div class="left-top">让10亿国人每日看书</div>
         <div class="nav-list">
             <ul>
-                <li class="menu-system"><a href="{{ url('admin/index') }}" class="icon-home on" title="系统首页">系统首页</a></li>
-                <li class="menu-system">
-                    <a href="javascript:;" class="icon-menu">权限管理</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/admin/admin') }}" title="管理员管理" class="iframeurl">管理员管理</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/role/role') }}" title="角色管理" class="iframeurl">角色管理</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/rights/rights') }}" title="权限管理" class="iframeurl">权限管理</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu-system">
-                    <a href="javascript:;" class="icon-menu">小说管理</a>
-                    <ul class="submenu">
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/novel/area') }}" title="发布区域" class="iframeurl">发布区域</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/novel/item') }}" title="小说分类" class="iframeurl">小说分类</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/novel/banner') }}" title="小说轮播" class="iframeurl">小说轮播</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/novel/index') }}" title="小说列表" class="iframeurl">小说列表</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/novel/recover') }}" title="小说回收" class="iframeurl">小说回收</a>
-                        </li>
-                        <li>
-                            <a href="javascript:;" name="{{ url('admin/novel/comment') }}" title="评论管理" class="iframeurl">评论管理</a>
-                        </li>
-                    </ul>
-                </li>
-                @if (isset($leftMenu) && count($leftMenu) > 0)
-                    @foreach ($leftMenu as $k=>$vo)
-                        @foreach ($vo as $v1)
-                            <li class="menu-{{ $k }} @if ($k != 'system') c-hide @endif">
-                                <a href="javascript:;" class="icon-{{ $v1['icon'] }}">{{ $v1['title'] }}</a>
+                @foreach (right_group() as $k=>$vo)
+                    @foreach ($vo['menu'] as $v1)
+                        <li class="menu-{{ $k }} @if (!$loop->parent->first) c-hide @endif">
+                            @if(count($v1['item']) == 1)
+                                <a href="{{ $v1['action'][key($v1['item'])]['url'] }}" class="{{ $v1['icon'] }}">{{ $v1['name'] }}</a>
+                            @else
+                                <a href="javascript:;" class="{{ $v1['icon'] }}">{{ $v1['name'] }}</a>
                                 <ul class="submenu">
-                                    @foreach ($v1['child'] as $v2)
+                                    @foreach ($v1['item'] as $k2=>$v2)
                                         <li>
-                                            @if (isset($v2['param']))
-                                                <a href="javascript:;" name="{{ url($v2['url'],$v2['param']) }}" title="{{ $v2['title'] }}" class="iframeurl">{{ $v2['title'] }}</a>
-                                            @else
-                                                <a href="javascript:;" name="{{ url($v2['url']) }}" title="{{ $v2['title'] }}" class="iframeurl">{{ $v2['title'] }}</a>
-                                            @endif
+                                            <a href="javascript:;" name="{{ $v1['action'][$k2]['url'] }}" title="{{ $v2 }}" class="iframeurl">{{ $v2 }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
-                            </li>
-                        @endforeach
+                            @endif
+                        </li>
                     @endforeach
-                @endif
+                @endforeach
             </ul>
         </div>
     </div>
