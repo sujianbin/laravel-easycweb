@@ -10,6 +10,6 @@ class AdminRole extends Model
 
     public function admin()
     {
-        return $this->hasMany('App\Model\Admin','id','role_id');
+        return $this->hasMany('App\Models\Admin','role_id','id');
     }
 }

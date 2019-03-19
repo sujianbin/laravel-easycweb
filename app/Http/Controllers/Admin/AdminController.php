@@ -16,20 +16,20 @@ class AdminController extends Controller
     public function index()
     {
         $lists = Admin::paginate();
-        return view('admin.admin.index',['lists'=>$lists]);
+        return view('admin.admin.index', ['lists' => $lists]);
     }
 
     public function create()
     {
         $roles = AdminRole::get();
-        return view('admin.admin.create',['roles'=>$roles]);
+        return view('admin.admin.create', ['roles' => $roles]);
     }
 
     public function edit($id)
     {
         $info = Admin::findOrFail($id);
         $roles = AdminRole::get();
-        return view('admin.admin.edit',['info'=>$info,'roles'=>$roles]);
+        return view('admin.admin.edit', ['info' => $info, 'roles' => $roles]);
     }
 
     public function store(StoreAdmin $request)
@@ -43,7 +43,7 @@ class AdminController extends Controller
         return response()->json($data);
     }
 
-    public function update(UpdateAdmin $request,$id)
+    public function update(UpdateAdmin $request, $id)
     {
         $admin = Admin::find($id);
         $admin->username = $request['username'];
@@ -56,7 +56,7 @@ class AdminController extends Controller
 
     public function editPwd(Request $request)
     {
-        if($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST') {
             $input = $request->all();
             $rules = [
                 'password' => 'required',
@@ -67,18 +67,18 @@ class AdminController extends Controller
                 'password1.required' => '确认密码不能为空',
             ];
             $validator = Validator::make($input, $rules, $messages);
-            if($validator->fails()){
+            if ($validator->fails()) {
                 $info = [
                     'code' => 101,
                     'msg' => $validator->getMessageBag()->first()
                 ];
-            }else{
-                if($input['password'] != $input['password1']){
+            } else {
+                if ($input['password'] != $input['password1']) {
                     $info = [
                         'code' => 101,
                         'msg' => '两次密码不一致'
                     ];
-                }else{
+                } else {
                     $admin = Admin::find(Auth::guard('admin')->user()->id);
                     $admin->password = bcrypt($input['password']);
                     $admin->save();
@@ -89,14 +89,15 @@ class AdminController extends Controller
                 }
             }
             return response()->json($info);
-        }else{
+        } else {
             return view('admin.admin.editpwd');
         }
     }
 
-    public function destory()
+    public function destroy($id)
     {
-        echo '删除方法';
+        $info = Admin::destroy($id);
+        return response()->json($info);
     }
 }
 

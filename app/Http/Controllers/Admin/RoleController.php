@@ -12,9 +12,8 @@ class RoleController extends Controller
 {
     public function index()
     {
-        //dd(right_group_rights());
         $lists = AdminRole::paginate();
-        return view('admin.role.index',['lists'=>$lists]);
+        return view('admin.role.index', ['lists' => $lists]);
     }
 
     public function create()
@@ -25,7 +24,7 @@ class RoleController extends Controller
     public function edit($id)
     {
         $info = AdminRole::findOrFail($id);
-        return view('admin.role.edit',['info'=>$info]);
+        return view('admin.role.edit', ['info' => $info]);
     }
 
     public function store(StoreRole $request)
@@ -33,32 +32,36 @@ class RoleController extends Controller
         $role = new AdminRole;
         $role->role_name = $request['role_name'];
         $role->role_description = $request['role_description'];
-        $role->right = implode(',',$request['right']);
+        $role->right = implode(',', $request['right']);
         $data = $role->save();
         return response()->json($data);
     }
 
-    public function update(UpdateRole $request,$id)
+    public function update(UpdateRole $request, $id)
     {
-        $input = $request->all();
         $role = AdminRole::find($id);
         $role->role_name = $request['role_name'];
         $role->role_description = $request['role_description'];
-        if($id == 1){//超级管理员的权限为0
+        if ($id == 1) {//超级管理员的权限为0
             $role->right = 0;
-        }else{
-            $role->right = implode(',',$request['right']);
+        } else {
+            $role->right = implode(',', $request['right']);
         }
         $data = $role->save();
         return response()->json($data);
     }
 
-    public function destory($id)
+    public function destroy($id)
     {
-        $info = [
-            'code'=>200,
-            'msg'=>'删除成功'
-        ];
-        return response()->json($info);
+        //超级管理员不可删除
+        if ($id == 1) return false;
+        //当前角色对应了管理员则不能删除
+        $admin = AdminRole::find($id)->admin;
+        if(count($admin) > 0){
+            return response()->json("当前角色拥有".count($admin).'个管理员，请先删除对应的管理员',200);
+        }else{
+            $info = AdminRole::destroy($id);
+            return response()->json($info);
+        }
     }
 }
