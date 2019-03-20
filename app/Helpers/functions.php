@@ -55,7 +55,7 @@ if (!function_exists('right_group')) {
                 ],
                 'action'=>[
                     'basic'=>[
-                        'url'=>url('admin/admin/config'),
+                        'url'=>url('admin/config/config'),
                         'action'=>'App\Http\Controllers\Admin\ConfigController@config'
                     ],
                     'password'=>[

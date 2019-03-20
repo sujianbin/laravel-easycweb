@@ -89,10 +89,3 @@ function animate(){
 		$("#progress").css("width",len+"px");
 	}
 }
-function remove_loading() {
-	window.clearInterval(t_id);
-	var targelem = document.getElementById('loader_container');
-	targelem.style.display = 'none';
-	targelem.style.visibility = 'hidden';
-	$("#iframe").show();
-}

@@ -50,5 +50,9 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
             Route::resource("admin",'AdminController',['except'=>['show']]);
             Route::match(['get','post'],'editPwd','AdminController@editPwd');
         });
+        //基本设置
+        Route::group(['prefix'=>'config'], function () {
+            Route::match(['get','post'],'config','ConfigController@config');
+        });
     });
 });
