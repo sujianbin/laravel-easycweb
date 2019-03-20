@@ -1,6 +1,6 @@
 @extends('admin.public.layout')
 @push('headscripts')
-    <script type="text/javascript" src="{{ URL::asset('js/admin/index.js') }}?v=3"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/admin/index.js') }}?v=3.0"></script>
     <script type="text/javascript">
         document.write('<div id="loader_container"><div id="loader"><div align="center">页面组件加载中……<br />首次加载可能会花费一分钟，请稍候...</div><div id="loader_bg"><div id="progress"> </div></div></div></div>');
         var pos = 0;
@@ -59,9 +59,9 @@
             </ul>
         </div>
     </div>
-    <div class="right">
+    <div class="right" style="display: none;">
         <div class="right-top"><a href="/">首页</a>><span class="next-a">系统首页</span></div>
-        <iframe id="iframe" onload="remove_loading();" frameborder="0" src="{{ (redirect()->intended('admin/centos')->getTargetUrl() == url('admin/index')) ? url('admin/centos') : (redirect()->intended('admin/centos')->getTargetUrl()) }}"></iframe>
+        <iframe id="iframe" onload="remove_loading();" frameborder="0" src="{{ redirect()->intended('admin/centos')->getTargetUrl() }}"></iframe>
     </div>
     <div class="hide" title="隐藏"></div>
 @endsection
@@ -73,5 +73,17 @@
             $("."+$(this).data("c")).removeClass("c-hide");
             $(this).siblings("li").removeClass("curr");
         });
+        function remove_loading() {
+            window.clearInterval(t_id);
+            var targelem = document.getElementById('loader_container');
+            targelem.style.display = 'none';
+            targelem.style.visibility = 'hidden';
+            var url = "{{ url('admin/index') }}";
+            if($("#iframe").attr('src') == url){
+                $("#iframe").attr('src',"{{ url('admin/centos') }}").ready();;
+            }
+            $(".right").show();
+            $("#iframe").show();
+        }
     </script>
 @endpush
