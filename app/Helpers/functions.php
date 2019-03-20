@@ -281,3 +281,35 @@ if (!function_exists('right_group_rights_checked')) {
     }
 }
 
+/**
+ * 后端统一格式返回json
+ */
+if(!function_exists('responseJson')) {
+    function responseJson($data){
+        if($data === true){//保存更新等动作
+            $data = [
+                'code'=>200,
+                'msg'=>'操作成功'
+            ];
+        }else if($data === false){//保存更新等动作
+            $data = [
+                'code'=>201,
+                'msg'=>'操作失败'
+            ];
+        }else if(is_numeric($data)){
+            if($data == 0){
+                $data = [
+                    'code'=>201,
+                    'msg'=>'删除失败'
+                ];
+            }else {
+                $data = [
+                    'code'=>200,
+                    'msg'=>"成功删除{$data}条数据"
+                ];
+            }
+        }
+        return response()->json($data);
+    }
+}
+

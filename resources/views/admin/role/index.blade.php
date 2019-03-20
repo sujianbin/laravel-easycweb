@@ -30,7 +30,7 @@
                                     <td>{{ $vo['role_name'] }}</td>
                                     <td>{{ $vo['role_description'] }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-primary btn-redirect">修改</button>
+                                        <button type="button" class="btn btn-primary btn-redirect" name="{{ route('role.edit',['id'=>$vo['id']]) }}">修改</button>
                                         @if($vo['id'] != 1)
                                             <button type="button" class="btn btn-warning btn-delete" data-id="{{ $vo['id'] }}" name="{{ route('role.destroy',['id'=>$vo['id']]) }}">删除</button>
                                         @endif

@@ -45,7 +45,7 @@ class SystemRightController extends Controller
         $systemRight->right = implode(';', $request['right']);
         $systemRight->order_id = $request['order_id'];
         $data = $systemRight->save();
-        return response()->json($data);
+        return responseJson($data);
     }
 
     public function update(UpdateSystemRight $request, $id)
@@ -57,14 +57,14 @@ class SystemRightController extends Controller
         $systemRight->right = implode(';', $input['right']);
         $systemRight->order_id = $input['order_id'];
         $data = $systemRight->save();
-        return response()->json($data);
+        return responseJson($data);
     }
 
     public function destroy($ids)
     {
         $ids = request()->has('ids') ? request()->get('ids') : $ids;
         $info = SystemRight::destroy($ids);
-        return response()->json($info);
+        return responseJson($info);
     }
 
     /**

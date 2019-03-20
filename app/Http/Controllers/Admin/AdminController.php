@@ -40,7 +40,7 @@ class AdminController extends Controller
         $admin->role_id = $request['role_id'];
         $admin->password = $request['password'] ? bcrypt($request['password']) : bcrypt(123456);
         $data = $admin->save();
-        return response()->json($data);
+        return responseJson($data);
     }
 
     public function update(UpdateAdmin $request, $id)
@@ -51,7 +51,7 @@ class AdminController extends Controller
         $admin->role_id = $request['role_id'];
         $request['password'] && $admin->password = bcrypt($request['password']);
         $data = $admin->save();
-        return response()->json($data);
+        return responseJson($data);
     }
 
     public function editPwd(Request $request)
@@ -88,7 +88,7 @@ class AdminController extends Controller
                     ];
                 }
             }
-            return response()->json($info);
+            return responseJson($info);
         } else {
             return view('admin.admin.editpwd');
         }
@@ -97,7 +97,7 @@ class AdminController extends Controller
     public function destroy($id)
     {
         $info = Admin::destroy($id);
-        return response()->json($info);
+        return responseJson($info);
     }
 }
 

@@ -64,13 +64,13 @@
                     data:{id:id},
                     dataType:'json',
                     success:function (data) {
-                        if(data == true){
+                        if(data.code == 200){
                             layer.msg('删除成功');
                             setTimeout(function () {
                                 location.reload();
                             },2000);
                         }else{
-                            layer.msg(data);
+                            layer.msg(data.msg);
                         }
                     },
                     error:function (e) {
@@ -203,13 +203,13 @@
                         dataType:'json',
                         success:function (data) {
                             console.info(data);
-                            if(data){
-                                layer.msg('成功删除'+data+'条数据');
+                            if(data.code == 200){
+                                layer.msg(data.msg);
                                 setTimeout(function () {
                                     location.reload();
                                 },2000);
                             }else{
-                                layer.msg('删除失败');
+                                layer.msg(data.msg);
                             }
                         },
                         error:function (e) {
@@ -274,10 +274,8 @@
                             setTimeout(function () {
                                 location.reload();
                             },1500);
-                        }else if(data.code == 101){
-                            layer.msg(data.msg);
                         }else{
-                            layer.msg('保存失败');
+                            layer.msg(data.msg);
                         }
                     }
                 },

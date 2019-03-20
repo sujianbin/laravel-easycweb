@@ -34,7 +34,7 @@ class RoleController extends Controller
         $role->role_description = $request['role_description'];
         $role->right = implode(',', $request['right']);
         $data = $role->save();
-        return response()->json($data);
+        return responseJson($data);
     }
 
     public function update(UpdateRole $request, $id)
@@ -48,7 +48,7 @@ class RoleController extends Controller
             $role->right = implode(',', $request['right']);
         }
         $data = $role->save();
-        return response()->json($data);
+        return responseJson($data);
     }
 
     public function destroy($id)
@@ -58,10 +58,14 @@ class RoleController extends Controller
         //当前角色对应了管理员则不能删除
         $admin = AdminRole::find($id)->admin;
         if(count($admin) > 0){
-            return response()->json("当前角色拥有".count($admin).'个管理员，请先删除对应的管理员',200);
+            $info = [
+                'code'=>201,
+                'msg'=>"当前角色拥有".count($admin).'个管理员，请先删除对应的管理员'
+            ];
+            return responseJson($info);
         }else{
             $info = AdminRole::destroy($id);
-            return response()->json($info);
+            return responseJson($info);
         }
     }
 }

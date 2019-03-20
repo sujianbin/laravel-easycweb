@@ -76,12 +76,12 @@
                     data:$("#loginForm").serialize(),
                     dataType:'json',
                     success:function(data){
-                        if(data.code == 0){
+                        if(data.code == 200){
                             layer.msg('验证成功', {
                                 icon: 16,shade: 0.01
                             },1000);
                             setTimeout(function(){
-                                location.href = '{{ redirect()->intended('admin/index')->getTargetUrl() }}';
+                                location.href = '{{ url('admin/index') }}';
                             },1000);
                         }else{
                             layer.msg(data.msg);

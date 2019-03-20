@@ -10,6 +10,9 @@ class IndexController extends Controller
 {
     public function index()
     {
+        $data = true;
+        $data = ['code'=>200,'msg'=>'true'];
+        dd(responseJson($data));
         $url = 'http://m.baixtao.cn';
         $ch = curl_init();
         curl_setopt ($ch, CURLOPT_URL, $url);
