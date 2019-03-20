@@ -54,5 +54,11 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
         Route::group(['prefix'=>'config'], function () {
             Route::match(['get','post'],'config','ConfigController@config');
         });
+        //文件上传
+        Route::group(['prefix'=>'upload'], function () {
+            Route::get('upload','UploadController@upload');
+            Route::get('uploadPicture/{path}','UploadController@uploadPicture');
+            Route::post('uploadPicture/{path}','UploadController@uploadPicture');
+        });
     });
 });
