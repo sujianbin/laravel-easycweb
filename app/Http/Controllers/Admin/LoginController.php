@@ -35,7 +35,7 @@ class LoginController extends Controller
                 //$admin = Admin::where('username',$input['username'])->first();
                 if (Auth::guard('admin')->attempt(['username' => $input['username'], 'password' => $input['pwd']])) {
                     $info = [
-                        'code' => 0,
+                        'code' => 200,
                         'msg' => '验证成功'
                     ];
                 } else {
@@ -45,7 +45,7 @@ class LoginController extends Controller
                     ];
                 }
             }
-            return response()->json($info);
+            return responseJson($info);
         } else {
             return view('admin.login.login');
         }

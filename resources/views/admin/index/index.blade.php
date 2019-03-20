@@ -61,7 +61,7 @@
     </div>
     <div class="right">
         <div class="right-top"><a href="/">首页</a>><span class="next-a">系统首页</span></div>
-        <iframe id="iframe" onload="remove_loading();" frameborder="0" src="{{ url('admin/centos') }}"></iframe>
+        <iframe id="iframe" onload="remove_loading();" frameborder="0" src="{{ (redirect()->intended('admin/centos')->getTargetUrl() == url('admin/index')) ? url('admin/centos') : (redirect()->intended('admin/centos')->getTargetUrl()) }}"></iframe>
     </div>
     <div class="hide" title="隐藏"></div>
 @endsection
