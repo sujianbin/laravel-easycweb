@@ -334,7 +334,7 @@
      * @callback string  回调函数(单张图片返回保存路径字符串，多张则为路径数组 )
      */
     function webuploader(num,elementId,path,callback){
-        var upload_url = "{{ url('admin.upload.uploadPicture') }}" + '?num=' + num + '&elementId=' + elementId + '&path=' + path + '&callback=' + callback;
+        var upload_url = "{{ url('admin/upload/upload') }}" + '?num=' + num + '&elementId=' + elementId + '&path=' + path + '&callback=' + callback;
         layer.open({
             type: 2,
             title: '上传图片',
