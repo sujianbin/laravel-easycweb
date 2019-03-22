@@ -38,7 +38,7 @@ class UpdateSystemRight extends FormRequest
             'name.required'=>'资源名称不能为空',
             'group.required'=>'分组名称不能为空',
             'order_id.min'=>'权重不能小于1',
-            'order_id.max'=>'权重不能大于999999',
+            'order_id.max'=>'权重必须在1-999999',
             'right.required'=>'权限码不能为空'
         ];
     }

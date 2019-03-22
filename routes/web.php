@@ -40,6 +40,7 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
             Route::resource("rights",'SystemRightController',['except'=>['show']]);
             Route::post('getAllController','SystemRightController@getAllController');
             Route::post('getControllerMethod','SystemRightController@getControllerMethod');
+            Route::post('setOrder','SystemRightController@setOrder');
         });
         //角色管理
         Route::group(['prefix'=>'role'], function () {

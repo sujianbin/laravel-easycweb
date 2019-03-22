@@ -10,7 +10,7 @@
 @endpush
 @section('content')
     <div class="header">
-        <div class="header-left">每日看书</div>
+        <div class="header-left">{{ cache('config')['seo_title'] }}</div>
         <div class="header-middle">
             <ul>
                 @foreach (right_group() as $k=>$vo)
@@ -35,7 +35,7 @@
         </div>
     </div>
     <div class="left">
-        <div class="left-top">让10亿国人每日看书</div>
+        <div class="left-top">{{ cache('config')['seo_keywords'] }}</div>
         <div class="nav-list">
             <ul>
                 @foreach (right_group() as $k=>$vo)

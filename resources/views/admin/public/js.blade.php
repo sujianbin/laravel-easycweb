@@ -96,33 +96,33 @@
             $(this).siblings("input").focus();
         });
 
-        //排序触发input
+        //ajax排序触发input
         $(".edit_order").on('blur',"input",function () {
             $(this).hide();
-            var table = $(this).parent().data("table");
-            var key = $(this).parent().data("key");
-            var id = $(this).parent().data("id");
-            var value = $(this).val();
-            var valueold = $(this).parent().data("value");
-            var parent = $(this).parent(".edit_order");
+            var key = $(this).parent().data("key"),
+                id = $(this).parent().data("id"),
+                url = $(this).parent().data("action"),
+                value = $(this).val(),
+                valueold = $(this).parent().data("value"),
+                parent = $(this).parent(".edit_order");
             parent.html("").text("").append('<span style="width:40px;"><img src="{{ URL::asset('images/admin/loading.gif') }}"/></span>');
             $.ajax({
                 type:'POST',
-                url:'{{ url("admin.index.setFieldValue") }}',
-                data:{table:table,key:key,value:value,id:id},
+                url:url,
+                data:{key:key,value:value,id:id},
                 dataType:'json',
                 success:function(data){
-                    if(data.code == 0){
+                    if(data.code == 200){
                         layer.msg('操作成功',{icon:1,time:800});
-                        parent.html("").text("").append('<span>'+value+'</span><input type="text" style="display: none;width: 60px;" name="order_id" value="'+value+'" />');
+                        parent.html("").text("").append('<span>'+value+'</span><input type="text" style="display: none;width: 60px;" name="'+key+'" value="'+value+'" />');
                     }else{
-                        layer.msg('操作失败',{icon:2,time:800});
-                        parent.html("").text("").append('<span>'+valueold+'</span><input type="text" style="display: none;width: 60px;" name="order_id" value="'+valueold+'" />');
+                        layer.msg(data.msg,{icon:2,time:800});
+                        parent.html("").text("").append('<span>'+valueold+'</span><input type="text" style="display: none;width: 60px;" name="'+key+'" value="'+valueold+'" />');
                     }
                 },
                 error:function(e){
-                    console.info(e);
-                    layer.msg('请求失败，请稍后重试！');
+                    var message = $.parseJSON(e.responseText);
+                    layer.msg(message.message);
                 }
             });
         });
@@ -134,15 +134,15 @@
             }else{
                 var value = 0;
             }
-            var table = $(this).parent().data("table");
-            var key = $(this).parent().data("key");
-            var id = $(this).parent().data("id");
-            var parent = $(this).parent(".edit_show");
+            var key = $(this).parent().data("key"),
+                id = $(this).parent().data("id"),
+                url = $(this).parent().data("url"),
+                parent = $(this).parent(".edit_show");
             parent.html("").text("").append('<span style="width:40px;"><img src="{{ URL::asset('images/admin/loading.gif') }}"/></span>');
             $.ajax({
                 type:'POST',
-                url:'{{ url("admin.index.setFieldValue") }}',
-                data:{table:table,key:key,value:value,id:id},
+                url:url,
+                data:{key:key,value:value,id:id},
                 dataType:'json',
                 success:function(data){
                     if(data.code == 0){
@@ -153,7 +153,7 @@
                             parent.html("").text("").append('<span class="span-yes"><img src="{{ URL::asset('images/admin/yes.png') }}"/></span>');
                         }
                     }else{
-                        layer.msg('操作失败',{icon:2,time:800});
+                        layer.msg(data.msg,{icon:2,time:800});
                         if(value == 1){
                             parent.html("").text("").append('<span class="span-no"><img src="{{ URL::asset('images/admin/cancel.png') }}"/></span>');
                         }else{
@@ -162,8 +162,8 @@
                     }
                 },
                 error:function(e){
-                    console.info(e);
-                    layer.msg('请求失败，请稍后重试！');
+                    var message = $.parseJSON(e.responseText);
+                    layer.msg(message.message);
                 }
             });
         });
