@@ -29,13 +29,10 @@ class IndexController extends Controller
         //cache:clear config:clear
         $process = proc_open('php artisan view:clear', $descriptorspec, $pipes, $cwd);
         if (is_resource($process)) {
-
             fwrite($pipes[0], 'start');
             fclose($pipes[0]);
-
             $content = stream_get_contents($pipes[1]);
             fclose($pipes[1]);
-
             // 切记：在调用 proc_close 之前关闭所有的管道以避免死锁。
             proc_close($process);
             return $content;

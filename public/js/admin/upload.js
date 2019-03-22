@@ -386,7 +386,7 @@ jQuery(function() {
             $("#filePicker2").hide();
         }
         $( '#'+file.id ).addClass('upload-state-done');
-        if(response.code == 0){
+        if(response.code == 200){
             $( '#'+file.id ).append('<div class="file-panel" style="height:0px;"><span class="cancel" data-img="'+response.url+'">删除</span><input type="hidden" name="picture_tmp[]" value="'+response.url+'"/></div>');
             $( '#'+file.id ).hover(function(){
                 $( '#'+file.id ).find('.file-panel').css('height','30px');
@@ -402,11 +402,11 @@ jQuery(function() {
                     data:{filename:filename},
                     dataType:'json',
                     success:function(data){
-                        if(data.code == 0){
+                        if(data.code == 200){
                             uploader.removeFile( file );
                             $("#filePicker2").show();
                         }else{
-                            alert(data.desc);
+                            alert(data.msg);
                         }
                     },
                     error:function(e){
@@ -417,7 +417,7 @@ jQuery(function() {
             });
         }else{
             uploader.removeFile( file );
-            alert(response.error);
+            alert(response.msg);
         }
     });
 

@@ -10,6 +10,14 @@ class IndexController extends Controller
 {
     public function index()
     {
+        echo config('filesystems.disks.'.config('filesystems.default').'.driver');
+        die;
+        $filename = preg_replace('/^\\/storage\\//','','/storage/goods/2222.png',1);
+        echo $filename;
+        die;
+        echo asset('storage/201903210306255c92ffb1c94f2.jpg');
+        echo storage_path('app/public');
+        die;
         $data = true;
         $data = ['code'=>200,'msg'=>'true'];
         dd(responseJson($data));

@@ -28,5 +28,15 @@
         @yield('content')
     </body>
     @include("admin.public.js")
+    <script type="text/javascript" src="{{ URL::asset('js/admin/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".s-file-list").sortable({cursor:'move'});
+            $(".s-file-list").disableSelection();
+            $(".s-file-list").on("click","span.cancel",function(){
+                $(this).parents("li.file").remove();
+            });
+        });
+    </script>
     @stack('footscripts')
 </html>

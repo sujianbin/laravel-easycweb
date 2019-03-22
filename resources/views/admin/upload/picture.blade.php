@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ URL::asset('plugin/webuploader/css/phoselect.css') }}">
     <script type="text/javascript" src="{{ URL::asset('js/admin/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('plugin/webuploader/webuploader.min.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/admin/upload.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/admin/upload.js') }}?v=1.0"></script>
     <script type="text/javascript" src="{{ URL::asset('plugin/layer/layer.js') }}"></script>
 </head>
 <body>

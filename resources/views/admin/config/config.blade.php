@@ -17,7 +17,11 @@
                             <tr>
                                 <th width="20%">网站标题</th>
                                 <td width="80%">
-                                    <input type="text" style="width:40%;" name="seo_title" value="{{ $info['seo_title'] }}">
+                                    @if(isset($info['seo_title']))
+                                        <input type="text" style="width:40%;" name="seo_title" value="{{ $info['seo_title'] }}" />
+                                    @else
+                                        <input type="text" style="width:40%;" name="seo_title" value="" />
+                                    @endif
                                     <br/><span class="ps">首页标题栏显示,不超过32个字符</span>
                                 </td>
                             </tr>
@@ -25,7 +29,11 @@
                             <tr>
                                 <th width="20%">网站关键字</th>
                                 <td width="80%">
-                                    <input type="text" style="width:80%;" name="seo_keywords" value="{{ $info['seo_keywords'] }}">
+                                    @if(isset($info['seo_keywords']))
+                                        <input type="text" style="width:80%;" name="seo_keywords" value="{{ $info['seo_keywords'] }}" />
+                                    @else
+                                        <input type="text" style="width:80%;" name="seo_keywords" value="" />
+                                    @endif
                                     <br /><span class="ps">推荐3-5个关键词，关键词之间用英文逗号,分开</span>
                                 </td>
                             </tr>
@@ -33,7 +41,11 @@
                             <tr>
                                 <th width="20%">网站描述</th>
                                 <td width="80%">
-                                    <textarea style="width:80%; height:100px;" name="seo_description">{{ $info['seo_description'] }}</textarea>
+                                    @if(isset($info['seo_description']))
+                                        <textarea style="width:80%; height:100px;" name="seo_description">{{ $info['seo_description'] }}</textarea>
+                                    @else
+                                        <textarea style="width:80%; height:100px;" name="seo_description"></textarea>
+                                    @endif
                                     <br><span class="ps">不超过255个字符，一般显示在搜索引擎首页描述里</span>
                                 </td>
                             </tr>
@@ -45,7 +57,7 @@
                                         <div class="y-file-list">
                                             <ul class="clearfix">
                                                 <ul class="s-file-list" id="logo">
-                                                    @if(!empty($info['logo']))
+                                                    @if(isset($info['logo']) && !empty($info['logo']))
                                                         <li class="file">
                                                             <div class="file-panel">
                                                                 <span class="cancel">删除</span>
@@ -57,7 +69,7 @@
                                                         </li>
                                                     @endif
                                                 </ul>
-                                                <li class="file y-addpho js-uploadBox" onclick="webuploader(1,'logo','tmp','');">
+                                                <li class="file y-addpho js-uploadBox" onclick="webuploader(1,'logo','config','');">
                                                     <div class="adp">
                                                         <h1>+</h1>
                                                         <p>上传图片</p>
@@ -90,7 +102,7 @@
                                                         </li>
                                                     @endif
                                                 </ul>
-                                                <li class="file y-addpho js-uploadBox" onclick="webuploader(1,'ico','tmp','');">
+                                                <li class="file y-addpho js-uploadBox" onclick="webuploader(1,'ico','config','');">
                                                     <div class="adp">
                                                         <h1>+</h1>
                                                         <p>上传图片</p>
@@ -105,9 +117,57 @@
                             </tr>
 
                             <tr>
+                                <th width="20%">商品相册(测试)</th>
+                                <td width="80%">
+                                    <div class="y-onlinemanage">
+                                        <label style="color: red;">*拖动图片可排序</label>
+                                        <div class="y-file-list">
+                                            <ul class="clearfix">
+                                                <ul class="s-file-list" id="goods_image">
+                                                    @if(isset($info['goods_image']) && !empty($info['goods_image']))
+                                                        @foreach (explode(';',$info['goods_image']) as $v)
+                                                            <li class="file">
+                                                                <div class="file-panel">
+                                                                    <span class="cancel">删除</span>
+                                                                </div>
+                                                                <div class="img">
+                                                                    <img src="{{ $v }}" alt="">
+                                                                </div>
+                                                                <input type="hidden" name="goods_image[]" value="{$v}" />
+                                                            </li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
+                                                <script type="text/javascript">
+                                                    layer.ready(function(){
+                                                        layer.photos({
+                                                            photos: $("#goods_image"),
+                                                            anim: 0 //0-6的选择，指定弹出图片动画类型，默认随机
+                                                        });
+                                                    });
+                                                </script>
+                                                <li class="file y-addpho js-uploadBox" onclick="webuploader(20,'goods_image','goods','');">
+                                                    <div class="adp">
+                                                        <h1>+</h1>
+                                                        <p>上传多图</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <span class="ps" >图片建议大小805*95</span>
+                                </td>
+                            </tr>
+
+                            <tr>
                                 <th width="20%">地址</th>
                                 <td width="80%">
-                                    <input type="text" style="width:40%;" name="address" value="{{ $info['address'] }}">
+                                    @if(isset($info['address']))
+                                        <input type="text" style="width:40%;" name="address" value="{{ $info['address'] }}" />
+                                    @else
+                                        <input type="text" style="width:40%;" name="address" value="" />
+                                    @endif
                                     <br /><span class="ps"></span>
                                 </td>
                             </tr>
@@ -115,7 +175,11 @@
                             <tr>
                                 <th width="20%">电话</th>
                                 <td width="80%">
-                                    <input type="text" style="width:40%;" name="phone" value="{{ $info['phone'] }}">
+                                    @if(isset($info['phone']))
+                                        <input type="text" style="width:40%;" name="phone" value="{{ $info['phone'] }}" />
+                                    @else
+                                        <input type="text" style="width:40%;" name="phone" value="" />
+                                    @endif
                                     <br /><span class="ps"></span>
                                 </td>
                             </tr>
@@ -123,7 +187,11 @@
                             <tr>
                                 <th width="20%">邮箱</th>
                                 <td width="80%">
-                                    <input type="text" style="width:40%;" name="email" value="{{ $info['email'] }}">
+                                    @if(isset($info['email']))
+                                        <input type="text" style="width:40%;" name="email" value="{{ $info['email'] }}" />
+                                    @else
+                                        <input type="text" style="width:40%;" name="email" value="" />
+                                    @endif
                                     <br /><span class="ps"></span>
                                 </td>
                             </tr>
@@ -131,7 +199,11 @@
                             <tr>
                                 <th width="20%">版权所有</th>
                                 <td width="80%">
-                                    <textarea style="width:80%; height:100px;" name="copyright">{{ $info['copyright'] }}</textarea>
+                                    @if(isset($info['copyright']))
+                                        <textarea style="width:80%; height:100px;" name="copyright">{{ $info['copyright'] }}</textarea>
+                                    @else
+                                        <textarea style="width:80%; height:100px;" name="copyright"></textarea>
+                                    @endif
                                     <br /><span class="ps"></span>
                                 </td>
                             </tr>
@@ -139,7 +211,11 @@
                             <tr>
                                 <th width="20%">其他代码</th>
                                 <td width="80%">
-                                    <textarea style="width:80%; height:100px;" name="other_code">{{ $info['other_code'] }}</textarea>
+                                    @if(isset($info['other_code']))
+                                        <textarea style="width:80%; height:100px;" name="other_code">{{ $info['other_code'] }}</textarea>
+                                    @else
+                                        <textarea style="width:80%; height:100px;" name="other_code"></textarea>
+                                    @endif
                                     <br /><span class="ps">可放置流量统计、百度商桥代码等</span>
                                 </td>
                             </tr>
