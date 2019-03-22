@@ -13,11 +13,19 @@ class ConfigController extends Controller
         if ($request->getMethod() == 'POST') {
             $input = $request->all();
             $info = Config::where('type','config')->pluck('value','name');
+            $info = $info->toArray();
             if(is_array($info)){
-
+                foreach ($input as $k=>$v){
+                    Config::updateOrCreate(['name'=>$k,'type'=>'config'],['value'=>$v]);
+                }
             }else{
-
+                foreach ($input as $k=>$v){
+                    $newData[] = ['name'=>$k,'value'=>$v,'type'=>'config'];
+                }
+                $config = new Config();
+                $config->insert($newData);
             }
+            return responseJson(true);
         }else{
             $info = Config::where('type','config')->pluck('value','name');
             return view('admin.config.config')->with('info',$info);
