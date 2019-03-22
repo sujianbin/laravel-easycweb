@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class ConfigController extends Controller
 {
@@ -25,6 +26,9 @@ class ConfigController extends Controller
                 $config = new Config();
                 $config->insert($newData);
             }
+            Cache::forget('config');
+            $data = Config::where('type','config')->pluck('value','name')->toArray();
+            Cache::forever('config', $data);
             return responseJson(true);
         }else{
             $info = Config::where('type','config')->pluck('value','name');

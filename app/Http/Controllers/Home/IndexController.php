@@ -5,11 +5,20 @@ namespace App\Http\Controllers\Home;
 use App\selector;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
     public function index()
     {
+        $config = Cache::get('config');
+        var_dump($config);
+        echo "<br />";
+        echo $config['seo_title'];
+        echo "<br />";
+        echo Cache::get('config')['seo_title'];
+        echo cache('config')['seo_title'];
+        exit;
         echo config('filesystems.disks.'.config('filesystems.default').'.driver');
         die;
         $filename = preg_replace('/^\\/storage\\//','','/storage/goods/2222.png',1);

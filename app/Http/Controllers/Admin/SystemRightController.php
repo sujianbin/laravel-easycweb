@@ -112,4 +112,12 @@ class SystemRightController extends Controller
         });
         return response()->json($methods);
     }
+
+    public function setOrder(Request $request)
+    {
+        $value = $request['value'];
+        $id = $request['id'];
+        $data = SystemRight::where('id',$id)->update(['order_id'=>$value]);
+        return responseJson($data);
+    }
 }
