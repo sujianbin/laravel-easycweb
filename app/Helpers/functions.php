@@ -37,7 +37,7 @@ if (!function_exists('right_group')) {
         });
         if (!empty($group)) {
             $group = explode('@', $group);
-            return $rightGroup[$group[0]]['name'] . '-' . $rightGroup[$group[0]]['menu'][$group[1]]['name'];
+            return $rightGroup[$group[0]]['name'] . '-' . $rightGroup[$group[0]]['menu'][$group[1]]['name'] . '-' . $rightGroup[$group[0]]['menu'][$group[1]]['item'][$group[2]];
         }
         return $rightGroup;
     }
@@ -48,57 +48,76 @@ if (!function_exists('right_group')) {
             'site' => [
                 'name' => '站点设置',
                 'en_name' => 'site',
-                'icon'=>'icon-system',
+                'icon' => 'icon-system',
                 'item' => [
                     'basic' => '基本设置',
                     'password' => '修改密码'
                 ],
-                'action'=>[
-                    'basic'=>[
-                        'url'=>url('admin/config/config'),
-                        'action'=>'App\Http\Controllers\Admin\ConfigController@config'
+                'action' => [
+                    'basic' => [
+                        'url' => url('admin/config/config'),
+                        'action' => 'App\Http\Controllers\Admin\ConfigController@config'
                     ],
-                    'password'=>[
-                        'url'=>url('admin/admin/editPwd'),
-                        'action'=>'App\Http\Controllers\Admin\AdminController@editPwd'
+                    'password' => [
+                        'url' => url('admin/admin/editPwd'),
+                        'action' => 'App\Http\Controllers\Admin\AdminController@editPwd'
                     ]
                 ]
             ],
             'rabc' => [
                 'name' => '权限管理',
                 'en_name' => 'rabc',
-                'icon'=>'icon-menu',
+                'icon' => 'icon-menu',
                 'item' => [
                     'admin' => '管理员管理',
                     'role' => '角色管理',
-                    'systemright'=>'权限管理'
+                    'systemright' => '权限管理'
                 ],
-                'action'=>[
-                    'admin'=>[
-                        'url'=>route('admin.index'),
-                        'action'=>'App\Http\Controllers\Admin\AdminController@index'
+                'action' => [
+                    'admin' => [
+                        'url' => route('admin.index'),
+                        'action' => 'App\Http\Controllers\Admin\AdminController@index'
                     ],
-                    'role'=>[
-                        'url'=>route('role.index'),
-                        'action'=>'App\Http\Controllers\Admin\RoleController@index'
+                    'role' => [
+                        'url' => route('role.index'),
+                        'action' => 'App\Http\Controllers\Admin\RoleController@index'
                     ],
-                    'systemright'=>[
-                        'url'=>route('rights.index'),
-                        'action'=>'App\Http\Controllers\Admin\SystemRightController@index'
+                    'systemright' => [
+                        'url' => route('rights.index'),
+                        'action' => 'App\Http\Controllers\Admin\SystemRightController@index'
                     ]
                 ]
             ],
             'home' => [
                 'name' => '系统首页',
                 'en_name' => 'home',
-                'icon'=>'icon-home',
+                'icon' => 'icon-home',
                 'item' => [
                     'home' => '系统首页'
                 ],
-                'action'=>[
-                    'home'=>[
-                        'url'=>url('admin/index'),
-                        'action'=>'App\Http\Controllers\Admin\IndexController@index'
+                'action' => [
+                    'home' => [
+                        'url' => url('admin/index'),
+                        'action' => 'App\Http\Controllers\Admin\IndexController@index'
+                    ]
+                ]
+            ],
+            'wechat' => [
+                'name' => '公众号管理',
+                'en_name' => 'wechat',
+                'icon' => 'icon-item',
+                'item' => [
+                    'info' => '基本信息',
+                    'menu' => '公众号菜单',
+                ],
+                'action' => [
+                    'info' => [
+                        'url' => url('admin/wechat/info'),
+                        'action' => 'App\Http\Controllers\Admin\WechatController@info'
+                    ],
+                    'menu' => [
+                        'url' => url('admin/wechat/index'),
+                        'action' => 'App\Http\Controllers\Admin\WechatController@index'
                     ]
                 ]
             ]
@@ -111,7 +130,7 @@ if (!function_exists('right_group')) {
             'novel' => [
                 'name' => '小说管理',
                 'en_name' => 'novel',
-                'icon'=>'icon-menu',
+                'icon' => 'icon-menu',
                 'item' => [
                     'area' => '发布区域',
                     'item' => '小说分类',
@@ -120,34 +139,34 @@ if (!function_exists('right_group')) {
                     'recovery' => '小说回收',
                     'comment' => '评论管理'
                 ],
-                'action'=>[
-                    'area'=>[
-                        'url'=>url('admin/novel/index'),
-                        'action'=>'App\Http\Controllers\Admin\NovelController@index'
+                'action' => [
+                    'area' => [
+                        'url' => url('admin/novel/index'),
+                        'action' => 'App\Http\Controllers\Admin\NovelController@index'
                     ],
-                    'item'=>[
-                        'url'=>url('admin/novel/index'),
-                        'action'=>'App\Http\Controllers\Admin\NovelController@index'
+                    'item' => [
+                        'url' => url('admin/novel/index'),
+                        'action' => 'App\Http\Controllers\Admin\NovelController@index'
                     ]
                     ,
-                    'novel'=>[
-                        'url'=>url('admin/novel/index'),
-                        'action'=>'App\Http\Controllers\Admin\NovelController@index'
+                    'novel' => [
+                        'url' => url('admin/novel/index'),
+                        'action' => 'App\Http\Controllers\Admin\NovelController@index'
                     ]
                     ,
-                    'banner'=>[
-                        'url'=>url('admin/novel/index'),
-                        'action'=>'App\Http\Controllers\Admin\NovelController@index'
+                    'banner' => [
+                        'url' => url('admin/novel/index'),
+                        'action' => 'App\Http\Controllers\Admin\NovelController@index'
                     ]
                     ,
-                    'recovery'=>[
-                        'url'=>url('admin/novel/index'),
-                        'action'=>'App\Http\Controllers\Admin\NovelController@index'
+                    'recovery' => [
+                        'url' => url('admin/novel/index'),
+                        'action' => 'App\Http\Controllers\Admin\NovelController@index'
                     ]
                     ,
-                    'comment'=>[
-                        'url'=>url('admin/novel/index'),
-                        'action'=>'App\Http\Controllers\Admin\NovelController@index'
+                    'comment' => [
+                        'url' => url('admin/novel/index'),
+                        'action' => 'App\Http\Controllers\Admin\NovelController@index'
                     ]
                 ]
             ]
@@ -160,28 +179,28 @@ if (!function_exists('right_group')) {
             'member' => [
                 'name' => '会员管理',
                 'en_name' => 'member',
-                'icon'=>'icon-menu',
+                'icon' => 'icon-menu',
                 'item' => [
                     'member' => '会员列表',
                 ],
-                'action'=>[
-                    'member'=>[
-                        'url'=>url('admin/member/index'),
-                        'action'=>'App\Http\Controllers\Admin\MemberController@index'
+                'action' => [
+                    'member' => [
+                        'url' => url('admin/member/index'),
+                        'action' => 'App\Http\Controllers\Admin\MemberController@index'
                     ]
                 ]
             ],
             'mch' => [
                 'name' => '代理商管理',
                 'en_name' => 'mch',
-                'icon'=>'icon-menu',
+                'icon' => 'icon-menu',
                 'item' => [
                     'mch' => '代理商列表'
                 ],
-                'action'=>[
-                    'mch'=>[
-                        'url'=>url('admin/mch/index'),
-                        'action'=>'App\Http\Controllers\Admin\MchController@index'
+                'action' => [
+                    'mch' => [
+                        'url' => url('admin/mch/index'),
+                        'action' => 'App\Http\Controllers\Admin\MchController@index'
                     ]
                 ]
             ]
@@ -194,19 +213,19 @@ if (!function_exists('right_group')) {
             'finance' => [
                 'name' => '财务管理',
                 'en_name' => 'finance',
-                'icon'=>'icon-menu',
+                'icon' => 'icon-menu',
                 'item' => [
                     'order' => '订单管理',
                     'centos' => '财务统计',
                 ],
-                'action'=>[
-                    'order'=>[
-                        'url'=>url('admin/finance/order'),
-                        'action'=>'App\Http\Controllers\Admin\FinaceController@order'
+                'action' => [
+                    'order' => [
+                        'url' => url('admin/finance/order'),
+                        'action' => 'App\Http\Controllers\Admin\FinaceController@order'
                     ],
-                    'centos'=>[
-                        'url'=>url('admin/finance/centos'),
-                        'action'=>'App\Http\Controllers\Admin\FinaceController@centos'
+                    'centos' => [
+                        'url' => url('admin/finance/centos'),
+                        'action' => 'App\Http\Controllers\Admin\FinaceController@centos'
                     ]
                 ]
             ]
@@ -284,28 +303,29 @@ if (!function_exists('right_group_rights_checked')) {
 /**
  * 后端统一格式返回json
  */
-if(!function_exists('responseJson')) {
-    function responseJson($data){
-        if($data === true){//保存更新等动作
+if (!function_exists('responseJson')) {
+    function responseJson($data)
+    {
+        if ($data === true) {//保存更新等动作
             $data = [
-                'code'=>200,
-                'msg'=>'操作成功'
+                'code' => 200,
+                'msg' => '操作成功'
             ];
-        }else if($data === false){//保存更新等动作
+        } else if ($data === false) {//保存更新等动作
             $data = [
-                'code'=>201,
-                'msg'=>'操作失败'
+                'code' => 201,
+                'msg' => '操作失败'
             ];
-        }else if(is_numeric($data)){
-            if($data == 0){
+        } else if (is_numeric($data)) {
+            if ($data == 0) {
                 $data = [
-                    'code'=>201,
-                    'msg'=>'删除失败'
+                    'code' => 201,
+                    'msg' => '删除失败'
                 ];
-            }else {
+            } else {
                 $data = [
-                    'code'=>200,
-                    'msg'=>"成功删除{$data}条数据"
+                    'code' => 200,
+                    'msg' => "成功删除{$data}条数据"
                 ];
             }
         }
