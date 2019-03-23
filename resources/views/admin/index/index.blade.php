@@ -79,7 +79,8 @@
             targelem.style.display = 'none';
             targelem.style.visibility = 'hidden';
             var url = "{{ url('admin/index') }}";
-            if($("#iframe").attr('src') == url){
+            var url1 = "{{ url('admin') }}";
+            if($("#iframe").attr('src') == url || $("#iframe").attr('src') == url1){
                 $("#iframe").attr('src',"{{ url('admin/centos') }}").ready();;
             }
             $(".right").show();

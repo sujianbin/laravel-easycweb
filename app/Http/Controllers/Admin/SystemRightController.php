@@ -45,6 +45,8 @@ class SystemRightController extends Controller
         $systemRight->right = implode(';', $request['right']);
         $systemRight->order_id = $request['order_id'];
         $data = $systemRight->save();
+        Cache::forget('admin_right_group');
+        Cache::forget('admin_right_group_rights');
         return responseJson($data);
     }
 
@@ -57,6 +59,8 @@ class SystemRightController extends Controller
         $systemRight->right = implode(';', $input['right']);
         $systemRight->order_id = $input['order_id'];
         $data = $systemRight->save();
+        Cache::forget('admin_right_group');
+        Cache::forget('admin_right_group_rights');
         return responseJson($data);
     }
 
@@ -64,6 +68,8 @@ class SystemRightController extends Controller
     {
         $ids = request()->has('ids') ? request()->get('ids') : $ids;
         $info = SystemRight::destroy($ids);
+        Cache::forget('admin_right_group');
+        Cache::forget('admin_right_group_rights');
         return responseJson($info);
     }
 
