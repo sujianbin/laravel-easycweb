@@ -55,6 +55,11 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
         Route::group(['prefix'=>'config'], function () {
             Route::match(['get','post'],'config','ConfigController@config');
         });
+        //微信公众号
+        Route::group(['prefix'=>'wechat'],function () {
+            //公众号菜单
+            Route::resource("menu",'WechatController');
+        });
         //文件上传
         Route::group(['prefix'=>'upload'], function () {
             Route::get('upload','UploadController@upload');

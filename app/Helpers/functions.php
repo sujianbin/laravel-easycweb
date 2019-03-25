@@ -112,12 +112,12 @@ if (!function_exists('right_group')) {
                 ],
                 'action' => [
                     'info' => [
-                        'url' => url('admin/wechat/info'),
+                        'url' => url('admin/menu/show'),
                         'action' => 'App\Http\Controllers\Admin\WechatController@info'
                     ],
                     'menu' => [
-                        'url' => url('admin/wechat/index'),
-                        'action' => 'App\Http\Controllers\Admin\WechatController@index'
+                        'url' => route('menu.index'),
+                        'action' => 'App\Http\Controllers\Admin\WechatController@menu'
                     ]
                 ]
             ]

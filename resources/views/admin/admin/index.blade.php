@@ -14,7 +14,6 @@
                     <table id="Role_list" cellpadding="0" cellspacing="0" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>选择</th>
                                 <th>ID</th>
                                 <th>用户名</th>
                                 <th>真实姓名</th>
@@ -25,14 +24,13 @@
                         <tbody>
                             @foreach ($lists as $vo)
                                 <tr>
-                                    <td><input type="checkbox" name="checkbox" data-id="{{ $vo['id'] }}"/></td>
                                     <td>{{ $vo['id'] }}</td>
                                     <td>{{ $vo['username'] }}</td>
                                     <td>{{ $vo['realname'] }}</td>
                                     <td>{{ $vo->role->role_name }}</td>
                                     <td>
                                         <button type="button" class="btn btn-primary btn-redirect" name="{{ route('admin.edit',['id'=>$vo['id']]) }}">修改</button>
-                                        <button type="button" class="btn btn-warning btn-delete" name="{{ url('admin/admin/destory',['id'=>$vo['id']]) }}">删除</button>
+                                        <button type="button" class="btn btn-warning btn-delete" name="{{ url('admin/admin/destroy',['id'=>$vo['id']]) }}">删除</button>
                                     </td>
                                 </tr>
                             @endforeach
