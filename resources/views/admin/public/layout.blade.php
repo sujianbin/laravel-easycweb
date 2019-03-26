@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="{{ URL::asset('plugin/webuploader/css/phoselect.css') }}">
         <link rel="shortcut icon" href="{{ cache('config')['ico'] }}">
         <script type="text/javascript" src="{{ URL::asset('js/admin/jquery.min.js') }}"></script>
+        <script src="{{ URL::asset('plugin/menu/assets/js/jquery-1.11.1.min.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('plugin/layer/layer.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('plugin/My97DatePicker/WdatePicker.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('plugin/highcharts/highcharts.js') }}"></script>
@@ -28,6 +29,7 @@
         @yield('content')
     </body>
     @include("admin.public.js")
+    @stack('footscripts')
     <script type="text/javascript" src="{{ URL::asset('js/admin/jquery-ui.min.js') }}"></script>
     <script type="text/javascript">
         $(function(){
@@ -38,5 +40,4 @@
             });
         });
     </script>
-    @stack('footscripts')
 </html>
