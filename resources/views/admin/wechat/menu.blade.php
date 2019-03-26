@@ -29,7 +29,7 @@
                                         @if($vo['status'] == 1)
                                             <span style="color: #079200!important;">菜单生效中</span>
                                         @else
-                                            <a href="{{ url('admin/wechat/menuEffective',['id'=>$vo['id']]) }}" style="color: #428bca!important;">生效并置顶</a>
+                                            <a href="javascript:;" class="s-menu-effective" data-name="{{ url('admin/wechat/menuEffective',['id'=>$vo['id']]) }}" style="color: #428bca!important;">生效并置顶</a>
                                         @endif
                                     </td>
                                     <td>
@@ -46,3 +46,29 @@
         </div>
     </div>
 @endsection
+@push('footscripts')
+    <script type="text/javascript">
+        $(".s-menu-effective").bind('click',function () {
+            var url = $(this).data('name');
+            $.ajax({
+                type:'GET',
+                url:url,
+                data:{},
+                success:function (data) {
+                    if (data.errcode=='0') {
+                        layer.msg('发布成功！',{icon:1,time:1500});
+                        setTimeout(function(){
+                            location.reload();
+                        },1500);
+                    } else {
+                        layer.alert("发布失败，错误代码:"+data.errcode+"，错误提示："+data.errmsg);
+                    }
+                },
+                error:function (e) {
+                    console.info(e);
+                    layer.alert("请求失败");
+                }
+            });
+        });
+    </script>
+@endpush

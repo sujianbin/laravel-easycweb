@@ -21,19 +21,17 @@
             <div class="Manager_style">
                 <div class="title_name">编辑公众号菜单</div>
                 <div class="Role_list">
-                    <form id="submit-form" name="myform" action="{{ route('menu.store') }}" method="post">
-                        @include("admin.wechat.menu_form")
-                    </form>
+                    @include("admin.wechat.menu_form")
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-@push('footerscripts')
+@push('footscripts')
     <script type="text/javascript">
         //显示自定义按钮组
-        var obj = "{{ $menu }}";
+        var obj = {!! $menu !!};
     </script>
     <script src="{{ URL::asset('plugin/menu/assets/js/jquery-1.11.1.min.js') }}"></script>
     <script src="{{ URL::asset('plugin/menu/assets/js/bootstrap.min.js') }}"></script>
@@ -43,42 +41,41 @@
     <script type="text/javascript">
         //保存
         function saveAjax(){
-            //console.info(obj);
-            //return false;
             var name = $("input[name=name]").val();
             if(!name){
                 layer.alert("菜单名称不能为空");
             }else{
                 $.ajax({
-                    type: "POST",
-                    url: "{{ url('menu.store') }}",
+                    type: "PATCH",
+                    url: "{{ route('menu.update',$info) }}",
                     data : {
-                    "menu" :JSON.stringify(obj) ,//先将对象转换为字符串再传给后台
+                        "id": "{{ $info['id'] }}",
+                        "menu" :JSON.stringify(obj) ,//先将对象转换为字符串再传给后台
                         "name" : name
                     },
                     dataType : "json",
                     beforeSend:function(){
-                    layer.msg('菜单设置中', {
+                        layer.msg('菜单设置中', {
                             icon: 16
                             ,shade: 0.01
                             ,time:false
                         });
                     },
                     success : function(data) {
-                    console.info(data);
-                    if (data.errcode=='0') {
-                        layer.msg('发布成功！',{icon:1,time:1500});
+                        console.info(data);
+                        if (data.errcode=='0') {
+                            layer.msg('发布成功！',{icon:1,time:1500});
                             setTimeout(function(){
                                 location.reload();
                             },1500);
                         } else {
-                        layer.alert("发布失败，错误代码:"+data.errcode+"，错误提示："+data.errmsg);
-                    }
-                },
+                            layer.alert("发布失败，错误代码:"+data.errcode+"，错误提示："+data.errmsg);
+                        }
+                    },
                     error:function(e){
-                    console.info(e);
-                    layer.alert("请求失败");
-                }
+                        console.info(e);
+                        layer.alert("请求失败");
+                    }
                 });
             }
         }
@@ -95,12 +92,12 @@
                         <div id="1" class="col-xs-4">
                             <div class="panel panel-default">
                                 <div class="panel-heading msg-date">
-    3月25日
-    </div>
+                                    3月25日
+                                </div>
                                 <div class="panel-body">
-                                    <h5 class="msg-title">测试</h5>
-                                    <div class="msg-img"><img src="{$vo['picture']}" alt=""></div>
-                                    <p class="msg-text">测试的描述</p>
+                                    <h5 class="msg-title">如何使用？</h5>
+                                    <div class="msg-img"><img src="/images/admin/bg.jpg" alt=""></div>
+                                    <p class="msg-text">在当前系统添加微信素材，程序会自动通过关键字回复，请自行去实现（我太懒）！</p>
                                 </div>
                                 <div class="mask-bg"><div class="mask-icon"><i class="icon-ok"></i></div></div>
                             </div>

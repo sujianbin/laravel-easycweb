@@ -40,15 +40,13 @@
     <script type="text/javascript">
         //保存
         function saveAjax(){
-            //console.info(obj);
-            //return false;
             var name = $("input[name=name]").val();
             if(!name){
                 layer.alert("菜单名称不能为空");
             }else{
                 $.ajax({
                     type: "POST",
-                    url: "{{ url('menu.store') }}",
+                    url: "{{ route('menu.store') }}",
                     data : {
                         "menu" :JSON.stringify(obj) ,//先将对象转换为字符串再传给后台
                         "name" : name
@@ -95,9 +93,9 @@
                                     3月25日
                                 </div>
                                 <div class="panel-body">
-                                    <h5 class="msg-title">测试</h5>
-                                    <div class="msg-img"><img src="{$vo['picture']}" alt=""></div>
-                                    <p class="msg-text">测试的描述</p>
+                                    <h5 class="msg-title">如何使用？</h5>
+                                    <div class="msg-img"><img src="/images/admin/bg.jpg" alt=""></div>
+                                    <p class="msg-text">在当前系统添加微信素材，程序会自动通过关键字回复，请自行去实现（我太懒）！</p>
                                 </div>
                                 <div class="mask-bg"><div class="mask-icon"><i class="icon-ok"></i></div></div>
                             </div>

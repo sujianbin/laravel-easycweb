@@ -57,8 +57,10 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'], function () {
         });
         //微信公众号
         Route::group(['prefix'=>'wechat'],function () {
+            Route::get("info",'WechatController@info');
             //公众号菜单
             Route::resource("menu",'WechatController');
+            Route::get('menuEffective/{id}','WechatController@menuEffective');
         });
         //文件上传
         Route::group(['prefix'=>'upload'], function () {
