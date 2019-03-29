@@ -20,9 +20,7 @@
         <script type="text/javascript" src="{{ URL::asset('plugin/My97DatePicker/WdatePicker.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('plugin/highcharts/highcharts.js') }}"></script>
         <script type="text/javascript" src="{{ URL::asset('plugin/highcharts/exporting.js') }}"></script>
-        <script type="text/javascript" charset="utf-8" src="{{ URL::asset('plugin/UEditor/ueditor.config.js') }}"></script>
-        <script type="text/javascript" charset="utf-8" src="{{ URL::asset('plugin/UEditor/ueditor.all.js') }}"></script>
-        <script type="text/javascript" charset="utf-8" src="{{ URL::asset('plugin/UEditor/lang/zh-cn/zh-cn.js') }}"></script>
+        @include('vendor.ueditor.assets')
         @stack('headscripts')
     </head>
     <body>

@@ -117,7 +117,7 @@
                             </tr>
 
                             <tr>
-                                <th width="20%">商品相册(测试)</th>
+                                <th width="20%">多图(测试)</th>
                                 <td width="80%">
                                     <div class="y-onlinemanage">
                                         <label style="color: red;">*拖动图片可排序</label>
@@ -157,6 +157,23 @@
                                     </div>
                                     <br />
                                     <span class="ps" >图片建议大小805*95</span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th width="20%">编辑器（测试）</th>
+                                <td width="80%">
+                                    <div class="content">
+                                        <script id="detail" name="detail" type="text/plain"></script>
+                                        <br />
+                                        <span class="ps">编辑器内容测试</span>
+                                        <script type="text/javascript">
+                                            var ue = UE.getEditor('detail');
+                                            ue.ready(function() {
+                                                ue.execCommand('serverparam', '_token', '{{ csrf_token() }}'); // 设置 CSRF token.
+                                            });
+                                        </script>
+                                    </div>
                                 </td>
                             </tr>
 

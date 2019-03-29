@@ -1,12 +1,12 @@
 @extends('admin.public.layout')
 @push('headscripts')
     <script type="text/javascript" src="{{ URL::asset('js/admin/index.js') }}?v=3.0"></script>
-    <script type="text/javascript">
-        document.write('<div id="loader_container"><div id="loader"><div align="center">页面组件加载中……<br />首次加载可能会花费一分钟，请稍候...</div><div id="loader_bg"><div id="progress"> </div></div></div></div>');
-        var pos = 0;
-        var dir = 2;
-        var len = 0;
-    </script>
+    {{--<script type="text/javascript">--}}
+        {{--document.write('<div id="loader_container"><div id="loader"><div align="center">页面组件加载中……<br />首次加载可能会花费一分钟，请稍候...</div><div id="loader_bg"><div id="progress"> </div></div></div></div>');--}}
+        {{--var pos = 0;--}}
+        {{--var dir = 2;--}}
+        {{--var len = 0;--}}
+    {{--</script>--}}
 @endpush
 @section('content')
     <div class="header">
@@ -75,9 +75,9 @@
         });
         function remove_loading() {
             window.clearInterval(t_id);
-            var targelem = document.getElementById('loader_container');
-            targelem.style.display = 'none';
-            targelem.style.visibility = 'hidden';
+            {{--var targelem = document.getElementById('loader_container');--}}
+            {{--targelem.style.display = 'none';--}}
+            {{--targelem.style.visibility = 'hidden';--}}
             var url = "{{ url('admin/index') }}";
             var url1 = "{{ url('admin') }}";
             if($("#iframe").attr('src') == url || $("#iframe").attr('src') == url1){
