@@ -9,6 +9,7 @@ use App\Models\AdminRole;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -59,10 +60,12 @@ class AdminController extends Controller
         if ($request->getMethod() == 'POST') {
             $input = $request->all();
             $rules = [
+                'old_password' => 'required',
                 'password' => 'required',
                 'password1' => 'required',
             ];
             $messages = [
+                'old_password.required' => '旧密码不能为空',
                 'password.required' => '密码不能为空',
                 'password1.required' => '确认密码不能为空',
             ];
@@ -73,7 +76,12 @@ class AdminController extends Controller
                     'msg' => $validator->getMessageBag()->first()
                 ];
             } else {
-                if ($input['password'] != $input['password1']) {
+                if (!Hash::check($input['old_password'], Auth::guard('admin')->user()->password)){
+                    $info = [
+                        'code' => 101,
+                        'msg' => '旧密码错误'
+                    ];
+                } else if ($input['password'] != $input['password1']) {
                     $info = [
                         'code' => 101,
                         'msg' => '两次密码不一致'
