@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
 {
@@ -37,28 +36,5 @@ class IndexController extends Controller
             proc_close($process);
             return $content;
         }
-    }
-
-    public function test()
-    {
-        echo 222;
-        $input = [
-            'username' => 'admin',
-            'password' => '1234561'
-        ];
-        $data = Auth::guard('admin')->attempt(['username' => $input['username'], 'password' => $input['password']]);
-        var_dump($data);
-
-        echo Auth::guard('admin')->check();
-
-        $admin = Auth::guard('admin')->user();
-
-        Auth::guard('admin')->logout();
-        var_dump($admin);
-    }
-
-    public function role()
-    {
-        echo 'role';
     }
 }

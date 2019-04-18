@@ -25,6 +25,15 @@
                                 </tr>
 
                                 <tr>
+                                    <th width="20%">旧密码</th>
+                                    <td width="80%">
+                                        <input type="password" style="width:300px" name="old_password" value=""/>
+                                        <br />
+                                        <span class="ps s-validate-old_password"></span>
+                                    </td>
+                                </tr>
+
+                                <tr>
                                     <th width="20%">新密码</th>
                                     <td width="80%">
                                         <input type="password" style="width:300px" name="password" value=""/>
